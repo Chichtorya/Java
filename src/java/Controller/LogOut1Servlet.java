@@ -9,6 +9,7 @@ import Account.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,28 +21,23 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "LogOut1Servlet", urlPatterns = {"/logout"})
+public class LogOut1Servlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String Gmail = request.getParameter("Gmail");
-        String Password = request.getParameter("Password");
-        AccountDAO dao = new AccountDAO();
-        AccountDTO userAccount = null;
-        try {
-            userAccount = dao.getAccount(Gmail, Password);
-            } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(userAccount != null)
-        {
-            
-            response.sendRedirect("home.jsp");
-        }
-        else
-        {
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

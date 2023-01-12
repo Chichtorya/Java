@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class Connect_mySql {
     public static Connection getConnect() {
-        String jdbcURL = "jdbc:mysql://localhost:3306/demo";
+        String jdbcURL = "jdbc:mysql://localhost:3306/webDatabase";
         String jdbcUsername = "root";
         String jdbcPassword = "12345678";
         Connection connection = null;

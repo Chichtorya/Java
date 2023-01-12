@@ -18,7 +18,7 @@ public class AccountDAO implements Serializable {
 
     public AccountDTO getAccount(String gmail, String password) throws SQLException {
         String mySql = "select*\n"
-                + "From `User`.`Account`\n"
+                + "From webdatabase.useraccount\n"
                 + "Where Gmail = ? and Password = ?";
         AccountDTO userAccount = null;
         Connection con = null;
