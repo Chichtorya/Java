@@ -1,6 +1,8 @@
 # G6
 
-
+## PROJECT DOCUMENTS
+- [ ] [Tracking File](https://docs.google.com/spreadsheets/d/1Vi6t2Sn7hmrUtAWw40d3Vly-6Pmp4NOQTF_sKHvLuwE/edit?usp=sharing)
+- [ ] [POC](https://docs.google.com/document/d/1L6IBkGTgwfo9mCQ9HBjwYRTr2K9B77zPVcS3TLBXEgc/edit?usp=sharing)
 
 ## Getting started
 
