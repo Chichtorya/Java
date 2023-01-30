@@ -4,10 +4,10 @@
  */
 package Controller;
 
-import Account.AccountDAO;
-import Account.AccountDTO;
+
+import Dao.UserProfileDAO;
+import Model.User_Profile.UserProfile;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,17 +26,17 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String Gmail = request.getParameter("Gmail");
         String Password = request.getParameter("Password");
-        AccountDAO dao = new AccountDAO();
-        AccountDTO userAccount = null;
+        UserProfileDAO dao = new UserProfileDAO();
+        UserProfile userAccount = null;
         try {
-            userAccount = dao.getAccount(Gmail, Password);
+            userAccount = dao.GetUserData(Gmail, Password);
             } catch (SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(userAccount != null)
         {
             
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("Home.jsp");
         }
         else
         {
