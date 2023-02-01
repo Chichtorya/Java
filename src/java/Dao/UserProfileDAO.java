@@ -11,17 +11,19 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author Admin
  */
-public class UserProfileDAO extends DbContext implements Serializable{
+public class UserProfileDAO extends DbContext implements Serializable {
 
     ///<Summary>
     /// Check If Account Is Exists.
@@ -64,7 +66,7 @@ public class UserProfileDAO extends DbContext implements Serializable{
         return 0;
     }
 
-    public UserProfile GetUserData(String gmail, String password) throws SQLException{
+    public UserProfile GetUserData(String gmail, String password) throws SQLException {
         String mySql = "select*\n"
                 + "From user_profile\n"
                 + "Where Gmail = ? and Password = ?;";
@@ -81,12 +83,12 @@ public class UserProfileDAO extends DbContext implements Serializable{
                 String Name = res.getString("name");
                 String Phone_Number = res.getString("Phone_Number");
                 String Date_Of_Birth = null;
-                Gender Gender = null;
-                Role Role = null;
+                Gender gender = null;//Gender.valueOf(res.getString("Gender"));
+                Role role = null;//Role.valueOf(res.getString("Role"));
                 String Address = res.getString("Addr");
                 String Gmail = res.getString("Gmail");
                 String Password = res.getString("Password");
-                return new UserProfile(Id, Name, Phone_Number, Date_Of_Birth, Gender, Role, Address, Gmail, Password);
+                return new UserProfile(Id, Name, Phone_Number, Date_Of_Birth, gender, role, Address, Gmail, Password);
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -110,8 +112,8 @@ public class UserProfileDAO extends DbContext implements Serializable{
             st.setString(1, newUserProfile.getName());
             st.setString(2, newUserProfile.getPhone_Number());
             st.setString(3, null);
-            st.setString(4, null);
-            st.setString(5, null);
+            st.setString(4, newUserProfile.getGender().toString());
+            st.setString(5, newUserProfile.getRole().toString());
             st.setString(6, newUserProfile.getAddress());
             st.setString(7, newUserProfile.getPassword());
             st.setInt(8, newUserProfile.getId());
@@ -151,16 +153,63 @@ public class UserProfileDAO extends DbContext implements Serializable{
         }
         return 0;
     }
-    
+
+    ///<Summary>
+    /// Search userProfile by their name
+    ///</Summary>
+    public List<UserProfile> SearchUser(String name) {
+        List<UserProfile> userList = new ArrayList<UserProfile>();
+        String mySql = "select*\n"
+                + "From user_profile;";
+        Connection con = connection;
+        PreparedStatement pre = null;
+        ResultSet res = null;
+        try {
+            pre = con.prepareStatement(mySql);
+            res = pre.executeQuery();
+            while (res.next()) {
+                if (isContain(res.getString("name"), name)) {
+                    int Id = res.getInt("Id");
+                    String Name = res.getString("name");
+                    String Phone_Number = res.getString("Phone_Number");
+                    String Date_Of_Birth = null;
+                    Gender gender = Gender.valueOf(res.getString("Gender"));
+                    Role role = Role.valueOf(res.getString("Role"));
+                    String Address = res.getString("Addr");
+                    String Gmail = res.getString("Gmail");
+                    String Password = res.getString("Password");
+                    UserProfile userProfile = new UserProfile(Id, Name, Phone_Number, Date_Of_Birth, gender, role, Address, Gmail, Password);
+                    userList.add(userProfile);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        if (userList.isEmpty()) {
+            return null;
+        } else {
+            return userList;
+        }
+    }
+
+    ///<Summary>
+    /// Check if string contain a word
+    ///</Summary>
+    private static boolean isContain(String source, String subItem) {
+        String pattern = "\\b" + subItem + "\\b";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(source);
+        return m.find();
+    }
+
     public static void main(String[] args) {
         UserProfileDAO test = new UserProfileDAO();
         try {
             //System.out.println(test.CreateAccount("khanh","123"));
             //System.out.println(test.DeleteAccountByGmail("khanhbui@gmail.com"));
-            System.out.println(test.GetUserData("khanh","123"));
+            System.out.println(test.GetUserData("khanh", "123"));
         } catch (SQLException ex) {
             Logger.getLogger(UserProfileDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
-
