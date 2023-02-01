@@ -111,7 +111,7 @@ CREATE TABLE `Bill_Info` (
 CREATE TABLE `Schedule` (
   `Id` int PRIMARY KEY auto_increment,
   `User_Id` int,
-  `Day` ENUM ('Mon', 'Tue', 'Wed', 'Fri', 'Sat', 'Sun', 'Thu'),
+  `Day` date,
   `Time` datetime,
   `Patien_Id` int
 );
