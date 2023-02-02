@@ -27,8 +27,10 @@ public class DbContext {
 //      public Connection getConnection() {
 //        return connection;
 //    }
+   
+   //demoFunc
     public DbContext() {
-        String jdbcURL = "jdbc:mysql://localhost:3306/demoFunc";
+        String jdbcURL = "jdbc:mysql://localhost:3306/";
         String jdbcUsername = "root";
         String jdbcPassword = "sasa";
        

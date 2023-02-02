@@ -95,6 +95,12 @@ public class BloodTests {
     public int getMean_Corpuscular_Volume() {
         return Mean_Corpuscular_Volume;
     }
+
+    @Override
+    public String toString() {
+        return "BloodTests{" + "BlID=" + BlID + ", Medical_Test_Id=" + Medical_Test_Id + ", Red_Blood_Cell=" + Red_Blood_Cell + ", White_Blood_Cell=" + White_Blood_Cell + ", Platelets=" + Platelets + ", Hemoglobin=" + Hemoglobin + ", Hemattocrit=" + Hemattocrit + ", Mean_Corpuscular_Volume=" + Mean_Corpuscular_Volume + '}';
+    }
+    
     public static void main(String[] args) {
         BloodTests a = new BloodTests();
       

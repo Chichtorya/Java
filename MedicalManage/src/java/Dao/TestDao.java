@@ -373,7 +373,8 @@ public class TestDao extends DbContext {
 //bl.setMedical_Test_Id(5);
 //        t.addBloodyTestdata(bl);
 
-        List<BloodTests>
+        //List<BloodTests>
                 
     }
 }
+
