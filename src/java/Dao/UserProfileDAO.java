@@ -196,20 +196,14 @@ public class UserProfileDAO extends DbContext implements Serializable {
     /// Check if string contain a word
     ///</Summary>
     private static boolean isContain(String source, String subItem) {
-        String pattern = "\\b" + subItem + "\\b";
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(source);
-        return m.find();
+        return source.contains(subItem);
     }
 
     public static void main(String[] args) {
         UserProfileDAO test = new UserProfileDAO();
-        try {
-            //System.out.println(test.CreateAccount("khanh","123"));
-            //System.out.println(test.DeleteAccountByGmail("khanhbui@gmail.com"));
-            System.out.println(test.GetUserData("khanh", "123"));
-        } catch (SQLException ex) {
-            Logger.getLogger(UserProfileDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //System.out.println(test.CreateAccount("khanh","123"));
+        //System.out.println(test.DeleteAccountByGmail("abc"));
+        System.out.println(test.SearchUser("kha"));
+        //System.out.println(test.GetUserData("khanh", "123"));
     }
 }
