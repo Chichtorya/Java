@@ -83,8 +83,8 @@ public class UserProfileDAO extends DbContext implements Serializable {
                 String Name = res.getString("name");
                 String Phone_Number = res.getString("Phone_Number");
                 String Date_Of_Birth = null;
-                Gender gender = null;//Gender.valueOf(res.getString("Gender"));
-                Role role = null;//Role.valueOf(res.getString("Role"));
+                String gender = null;//Gender.valueOf(res.getString("Gender"));
+                String role = null;//Role.valueOf(res.getString("Role"));
                 String Address = res.getString("Addr");
                 String Gmail = res.getString("Gmail");
                 String Password = res.getString("Password");
@@ -172,9 +172,9 @@ public class UserProfileDAO extends DbContext implements Serializable {
                     int Id = res.getInt("Id");
                     String Name = res.getString("name");
                     String Phone_Number = res.getString("Phone_Number");
-                    String Date_Of_Birth = null;
-                    Gender gender = Gender.valueOf(res.getString("Gender"));
-                    Role role = Role.valueOf(res.getString("Role"));
+                    String gender = res.getString("Gender");
+                    String role = res.getString("Role");
+                    String Date_Of_Birth = null;                  
                     String Address = res.getString("Addr");
                     String Gmail = res.getString("Gmail");
                     String Password = res.getString("Password");

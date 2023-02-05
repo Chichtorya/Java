@@ -21,7 +21,7 @@
     </form>
         <table border="1px solid black">
             <tr>
-                <th>Id</th>
+           
                 <th>Name</th>
                 <th>Phone Number</th>
                 <th>Date Of Birth</th>
@@ -29,6 +29,8 @@
                 <th>Role</th>
                 <th>Address</th>
                 <th>Gmail</th>
+                <th>Action</th>
+                
             </tr>
             <c:forEach items="${ListUser}" var="x">
                 <tr>
@@ -48,7 +50,7 @@
         </table>  
 
         <br>
-
+ <a href="/Home.jsp" class="btn btn-success">Back to Home</a>
 
     </body>
 </html>

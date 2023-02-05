@@ -21,19 +21,20 @@
 
         <div class="container">
             <h2>Table Create User</h2>
-            <form action="user?action=create" method="post">
-                
+            <form action="/user?action=create" method="post">
+
                 Enter the name employee :<input required value="${name1}"  name="name"><br><br>  
                 Enter the phone Number:<input required value="${phone1}" pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b" name="phone"> 
                 Enter the date Of Birth :   <input required type="date" value="${dateOfBirth1}"  name="dateOfBirth"><br><br>
-                Enter the gender :   <input checked type="radio" value ="Male" name="gender"> Male
-                <input type="radio"  value ="Female" name="gender"> FeMale
+                Enter the gender :   <input checked type="radio" value ="Male" name="gender" checked> Male
+                <input type="radio"  value ="FeMale" name="gender"> FeMale
                 <input type="radio"  value ="Unknow" name="gender">Unknown <br><br>
                 Enter the role :   <input checked type="radio" value ="Admin" name="role"> Admin
                 <input type="radio"  value ="Doctor" name="role"> Doctor
                 <input type="radio"  value ="Reception" name="role">Reception
-                <input type="radio"  value ="Other" name="role">Other<br><br>
+                <input type="radio"  value ="Other" name="role" checked>Other<br><br>
                 Enter the address :   <input required value="${address1}"  name="address"><br><br>
+                Enter the gmail :   <input required value="${gmail1}"  name="gmail"><br><br>
                 <button type="submit" class="btn btn-success">Create</button>
             </form>
         </div>

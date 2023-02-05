@@ -4,15 +4,13 @@
  */
 package dal;
 
-
-
-import Enum.Gender;
-import Enum.Role;
+import dal.DbContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.UserProfile;
+
 
 
 /**
@@ -33,8 +31,8 @@ public class UserDAO extends DbContext {
                         rs.getString("name"),
                         rs.getString("Phone_Number"),
                         rs.getString("Date_Of_Birth"),
-                        Gender.valueOf(rs.getString("Gender")),                       
-                        Role.valueOf(rs.getString("Role")),
+                        rs.getString("Gender"),
+                        rs.getString("Role"),
                         rs.getString("Addr"),
                         rs.getString("Gmail"),
                         rs.getString("Password")
@@ -73,8 +71,8 @@ public class UserDAO extends DbContext {
             ps.setString(1, pro.getName());
             ps.setString(2, pro.getPhone_Number());
             ps.setString(3, pro.getDate_Of_Birth());
-            ps.setString(4, pro.getGender().toString());
-            ps.setString(5, pro.getRole().toString());
+            ps.setString(4, pro.getGender());
+            ps.setString(5, pro.getRole());
             ps.setString(6, pro.getAddress());
             ps.setString(7, pro.getGmail());
             ps.setString(8, pro.getPassword());
@@ -106,8 +104,9 @@ public class UserDAO extends DbContext {
                         rs.getString("name"),
                         rs.getString("Phone_Number"),
                         rs.getString("Date_Of_Birth"),
-                        Gender.valueOf(rs.getString("Gender")),                       
-                        Role.valueOf(rs.getString("Role")),
+                        rs.getString("Gender"),
+                        rs.getString("Role"),
+                     
                         rs.getString("Addr"),
                         rs.getString("Gmail"),
                         rs.getString("Password")
@@ -120,16 +119,18 @@ public class UserDAO extends DbContext {
     }
 
     public void editUser(UserProfile pro,int id) {
-        String spl = "UPDATE User_Profile set name = ?,Phone_Number = ?, Date_Of_Birth = ? ,Gender= ? ,Role = ? ,Address = ? ,Gmail = ? where Id = ?";
+        String spl = "UPDATE User_Profile set name = ?,Phone_Number = ?, Date_Of_Birth = ? ,Gender= ? ,Role = ? ,Addr = ? ,Gmail = ? where Id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(spl);
             ps.setString(1, pro.getName());
             ps.setString(2, pro.getPhone_Number());
             ps.setString(3, pro.getDate_Of_Birth());
-            ps.setString(4, pro.getGender().toString());
-            ps.setString(5, pro.getRole().toString());
+            ps.setString(4, pro.getGender());
+            ps.setString(5, pro.getRole());
             ps.setString(6, pro.getAddress());
             ps.setString(7, pro.getGmail());
+            ps.setInt(8, id);
+            
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -138,6 +139,8 @@ public class UserDAO extends DbContext {
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
+        UserProfile u = new UserProfile("aaaaa11111", "234234", "2001-10-10", "Male", "Admin", "hn", "ds", "123");
+        dao.editUser(u, 2);
 //        UserProfile u = new UserProfile("aaaa", "088767", "2010-10-10", Gender.Unknow, Role.Other, "hn","abc@gmail.com", "123");
 //        dao.createUser(u);
 //        dao.deleteUserById(1);

@@ -15,13 +15,16 @@ public class UserProfile implements Serializable{
     private String Name;
     private String Phone_Number;
     private String Date_Of_Birth;
-    private Gender Gender;
-    private Role Role;
+    private String Gender;
+    private String Role;
     private String Address;
     private String Gmail;
     private String Password;
 
-    public UserProfile(int Id, String Name, String Phone_Number, String Date_Of_Birth, Gender Gender, Role Role, String Address, String Gmail, String Password) {
+    public UserProfile() {
+    }
+
+    public UserProfile(int Id, String Name, String Phone_Number, String Date_Of_Birth, String Gender, String Role, String Address, String Gmail, String Password) {
         this.Id = Id;
         this.Name = Name;
         this.Phone_Number = Phone_Number;
@@ -32,7 +35,9 @@ public class UserProfile implements Serializable{
         this.Gmail = Gmail;
         this.Password = Password;
     }
-      public UserProfile(String Name, String Phone_Number, String Date_Of_Birth, Gender Gender, Role Role, String Address, String Gmail, String Password) {
+
+    public UserProfile( String Name, String Phone_Number, String Date_Of_Birth, String Gender, String Role, String Address, String Gmail, String Password) {
+
         this.Name = Name;
         this.Phone_Number = Phone_Number;
         this.Date_Of_Birth = Date_Of_Birth;
@@ -42,20 +47,8 @@ public class UserProfile implements Serializable{
         this.Gmail = Gmail;
         this.Password = Password;
     }
-      public UserProfile(String Name, String Phone_Number, String Date_Of_Birth, Gender Gender, String Address, String Gmail) {
-        this.Name = Name;
-        this.Phone_Number = Phone_Number;
-        this.Date_Of_Birth = Date_Of_Birth;
-        this.Gender = Gender;
-        this.Address = Address;
-        this.Gmail = Gmail;
-       
-    }
-    public UserProfile(Role Role, String Gmail, String Password) {
-        this.Role = Role;
-        this.Gmail = Gmail;
-        this.Password = Password;
-    }
+
+     
 
     public int getId() {
         return Id;
@@ -89,21 +82,24 @@ public class UserProfile implements Serializable{
         this.Date_Of_Birth = Date_Of_Birth;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return Gender;
     }
 
-    public void setGender(Gender Gender) {
+    public void setGender(String Gender) {
         this.Gender = Gender;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return Role;
     }
 
-    public void setRole(Role Role) {
+    public void setRole(String Role) {
         this.Role = Role;
     }
+
+
+ 
 
     public String getAddress() {
         return Address;

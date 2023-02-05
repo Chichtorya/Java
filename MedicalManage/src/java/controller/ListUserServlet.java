@@ -59,7 +59,7 @@ public class ListUserServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+   @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     UserDAO dao = new UserDAO();
@@ -133,11 +133,16 @@ public class ListUserServlet extends HttpServlet {
                 String date = request.getParameter("dateOfBirth");
                 request.setAttribute("dateOfBirth1", date);
                 String gender =request.getParameter("gender");
+              
                 request.setAttribute("gender1", gender);
                 String role =request.getParameter("role");
+               
                 request.setAttribute("role1", role);
                 String address = request.getParameter("address");
                 request.setAttribute("address1", address);
+                String gmail = request.getParameter("gmail");
+                request.setAttribute("gmail1", gmail);
+                String password = "abc123";
                 if(!dao.checkPhone(phone)){
                     if(!dao.checkPhone(phone)){
                         String ms = "* Phone Exist";
@@ -146,23 +151,29 @@ public class ListUserServlet extends HttpServlet {
                     dispatcher = request.getRequestDispatcher("CreateUser.jsp");
                     dispatcher.forward(request, response);
                 }else{
-                UserProfile us = new UserProfile(name,phone, date, gender, role, address);
+                UserProfile us = new UserProfile(name,phone, date, gender, role ,address,gmail,password);
                 dao.createUser(us);
                 response.sendRedirect("/user");
                 }
                 break;
             case "update":
+                
                 String id =request.getParameter("id");      
-                String name1 = request.getParameter("name");
-                String phone1 = request.getParameter("phone");                
-                String date1 = request.getParameter("date");
-                String gender1 =request.getParameter("gender");
-                String role1 =request.getParameter("role");
-                String address1 = request.getParameter("address");i
-                UserProfile us = new UserProfile(name1, phone1, date1, gender1, role1,address1);
+                 
+                
                 try{
                     int id1 =Integer.parseInt(id);
-                    dao.editUser(us,id1);
+                    UserProfile us = dao.getUserById(id1);
+                    String name1 = request.getParameter("name");
+                String phone1 = request.getParameter("phone");                
+                String date1 = request.getParameter("date");
+                String gender2 =request.getParameter("gender");
+                String role2 =request.getParameter("role");
+                String address1 = request.getParameter("address");
+                String  gmail1= request.getParameter("gmail");
+                String pass = us.getPassword();
+                UserProfile us1 = new UserProfile(name1, phone1, date1, gender2, role2, address1, gmail1, pass);
+                    dao.editUser(us1,id1);
                     response.sendRedirect("/user");
                 }catch(NumberFormatException e){
                     System.out.println(e);
@@ -171,7 +182,6 @@ public class ListUserServlet extends HttpServlet {
                 break;
         }
     }
-
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
