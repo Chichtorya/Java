@@ -23,6 +23,19 @@ public class ImmunoassTest {
 
     public ImmunoassTest() {
     }
+    public ImmunoassTest( int MedicalTestId, float Digoxin, float Estradiol, float Ferritin, float FolicAcid, float Progesterone, float Prolactin, float TroponinT, float Testosterone, float TotalPSA) {
+
+        this.MedicalTestId = MedicalTestId;
+        this.Digoxin = Digoxin;
+        this.Estradiol = Estradiol;
+        this.Ferritin = Ferritin;
+        this.FolicAcid = FolicAcid;
+        this.Progesterone = Progesterone;
+        this.Prolactin = Prolactin;
+        this.TroponinT = TroponinT;
+        this.Testosterone = Testosterone;
+        this.TotalPSA = TotalPSA;
+    }
 
     public ImmunoassTest(int ImID, int MedicalTestId, float Digoxin, float Estradiol, float Ferritin, float FolicAcid, float Progesterone, float Prolactin, float TroponinT, float Testosterone, float TotalPSA) {
         this.ImID = ImID;

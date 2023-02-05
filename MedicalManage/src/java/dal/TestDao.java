@@ -2,9 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dal;
+package Dao;
 
-
+import Model.PatientTest;
+import Model.TestObj.BloodTests;
+import Model.TestObj.BiochemistryTests;
+import Model.TestObj.ImmunoassTest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -13,9 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.sql.Statement;
-import model.BiochemistryTests;
-import model.BloodTests;
-import model.ImmunoassTest;
 
 /**
  *
@@ -94,17 +94,17 @@ public class TestDao extends DbContext {
 
     // add Blood_Tests table - Tested - - not catching exception 
     public void addBloodyTestdata(BloodTests bloodTests) {
-        String sql = "INSERT INTO Blood_Test values(?,?,?,?,?,?,?,?) ;;";
+        String sql = "INSERT INTO Blood_Test values(0,?,?,?,?,?,?,?) ;;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, getMaxID(sql) + 1);
-            st.setInt(2, bloodTests.getMedical_Test_Id());
-            st.setDouble(3, bloodTests.getRed_Blood_Cell());
-            st.setDouble(4, bloodTests.getWhite_Blood_Cell());
-            st.setDouble(5, bloodTests.getPlatelets());
-            st.setFloat(6, bloodTests.getHemoglobin());
-            st.setFloat(7, bloodTests.getHemattocrit());
-            st.setInt(8, bloodTests.getMean_Corpuscular_Volume());
+        
+            st.setInt(1, bloodTests.getMedical_Test_Id());
+            st.setDouble(2, bloodTests.getRed_Blood_Cell());
+            st.setDouble(3, bloodTests.getWhite_Blood_Cell());
+            st.setDouble(4, bloodTests.getPlatelets());
+            st.setFloat(5, bloodTests.getHemoglobin());
+            st.setFloat(6, bloodTests.getHemattocrit());
+            st.setInt(7, bloodTests.getMean_Corpuscular_Volume());
 
             st.executeUpdate();
 
@@ -191,27 +191,27 @@ public class TestDao extends DbContext {
     // add Biochemistry table -  - - not catching exception 
 
     public void addBiochemistryTestdata(BiochemistryTests biTest) {
-        String sql = "INSERT INTO Biochemistry_Test values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ;;";
+        String sql = "INSERT INTO Biochemistry_Test values(0,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ;;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, getMaxID("Biochemistry_Test"));
-            st.setInt(2, biTest.getMedicalTestId());
-            st.setFloat(3, biTest.getFasting());
-            st.setFloat(4, biTest.getPp());
-            st.setFloat(5, biTest.getUrea());
-            st.setFloat(6, biTest.getS_Creatinine());
-            st.setFloat(7, biTest.getSodium());
-            st.setFloat(8, biTest.getPotassium());
-            st.setFloat(9, biTest.getCholoride());
-            st.setFloat(10, biTest.getTotalCalcium());
-            st.setFloat(11, biTest.getUricAcid());
-            st.setFloat(12, biTest.getTotalBilirubin());
-            st.setFloat(13, biTest.getAlkalinePhosphate());
-            st.setFloat(14, biTest.getTotalProtein());
-            st.setFloat(15, biTest.getAlbumin());
-            st.setFloat(16, biTest.getTotalCholesterol());
-            st.setFloat(17, biTest.getTriglyceride());
-            st.setFloat(18, biTest.getADA());
+           
+            st.setInt(1, biTest.getMedicalTestId());
+            st.setFloat(2, biTest.getFasting());
+            st.setFloat(3, biTest.getPp());
+            st.setFloat(4, biTest.getUrea());
+            st.setFloat(5, biTest.getS_Creatinine());
+            st.setFloat(6, biTest.getSodium());
+            st.setFloat(7, biTest.getPotassium());
+            st.setFloat(8, biTest.getCholoride());
+            st.setFloat(9, biTest.getTotalCalcium());
+            st.setFloat(10, biTest.getUricAcid());
+            st.setFloat(11, biTest.getTotalBilirubin());
+            st.setFloat(12, biTest.getAlkalinePhosphate());
+            st.setFloat(13, biTest.getTotalProtein());
+            st.setFloat(14, biTest.getAlbumin());
+            st.setFloat(15, biTest.getTotalCholesterol());
+            st.setFloat(16, biTest.getTriglyceride());
+            st.setFloat(17, biTest.getADA());
 
             st.executeUpdate();
 
@@ -300,20 +300,20 @@ public class TestDao extends DbContext {
 
     // add Immunoass table -  - - not catching exception 
     public void addImmunoassTestdata(ImmunoassTest ImTest) {
-        String sql = "INSERT INTO Immunoass_Test values(?,?,?,?,?,?,?,?,?,?,?) ;;";
+        String sql = "INSERT INTO Immunoass_Test values(0,?,?,?,?,?,?,?,?,?,?) ;;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, getMaxID("Immunoass_Test"));
-            st.setInt(2, ImTest.getMedicalTestId());
-            st.setFloat(3, ImTest.getDigoxin());
-            st.setFloat(4, ImTest.getEstradiol());
-            st.setFloat(5, ImTest.getFerritin());
-            st.setFloat(6, ImTest.getFolicAcid());
-            st.setFloat(7, ImTest.getProgesterone());
-            st.setFloat(8, ImTest.getProlactin());
-            st.setFloat(9, ImTest.getTroponinT());
-            st.setFloat(10, ImTest.getTestosterone());
-            st.setFloat(11, ImTest.getTotalPSA());
+     
+            st.setInt(1, ImTest.getMedicalTestId());
+            st.setFloat(2, ImTest.getDigoxin());
+            st.setFloat(3, ImTest.getEstradiol());
+            st.setFloat(4, ImTest.getFerritin());
+            st.setFloat(5, ImTest.getFolicAcid());
+            st.setFloat(6, ImTest.getProgesterone());
+            st.setFloat(7, ImTest.getProlactin());
+            st.setFloat(8, ImTest.getTroponinT());
+            st.setFloat(9, ImTest.getTestosterone());
+            st.setFloat(10, ImTest.getTotalPSA());
 
             st.executeUpdate();
 
@@ -361,21 +361,90 @@ public class TestDao extends DbContext {
         }
 
     }
+public void addTest(PatientTest PaTest) {
+        String sql = "INSERT INTO Medical_Test values(0,?,?,?,?) ;;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+           
+            st.setInt(1, PaTest.getMedical_Test_Id());
+
+            st.setString(2, PaTest.getDoctor());
+            st.setString(3, PaTest.getDescription());
+
+            st.setDouble(4, PaTest.getPrice());
+            
+
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+ public List<PatientTest> getPatientTestsByDoc(int doctor) {
+        List<PatientTest> list = new ArrayList<>();
+        String sql = "select * from Medical_Test where Doctor_In_Charge = ? ; ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, doctor);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                PatientTest PaT = new PatientTest();
+                PaT.setPaID(rs.getInt("Id"));
+                PaT.setMedical_Test_Id(rs.getInt("Medical_Test_Id"));
+
+                PaT.setDoctor(rs.getString("Doctor_In_Charge"));
+                PaT.setDescription(rs.getString("Description"));
+     
+                PaT.setPrice(rs.getDouble("Price"));
+          
+                list.add(PaT);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+ }
+ public List<PatientTest> getPatientTestsById(int id    ) {
+        List<PatientTest> list = new ArrayList<>();
+        String sql = "select * from Medical_Test where Medical_Test_Id = ? ; ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                PatientTest PaT = new PatientTest();
+                PaT.setPaID(rs.getInt("Id"));
+                PaT.setMedical_Test_Id(rs.getInt("Medical_Test_Id"));
+
+                PaT.setDoctor(rs.getString("Doctor_In_Charge"));
+                PaT.setDescription(rs.getString("Description"));
+
+                PaT.setPrice(rs.getDouble("Price"));
+          
+                list.add(PaT);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+ }
 
     public static void main(String[] args) {
         List<String> b = new ArrayList<>();
         TestDao t = new TestDao();
         BloodTests bl = new BloodTests();
-//        bl.setHemoglobin((float)5);
-//        bl.setPlatelets(5);
-//        bl.setRed_Blood_Cell(5);
-//                bl.setMean_Corpuscular_Volume(5);
+        bl.setHemoglobin((float)5);
+        bl.setPlatelets(5);
+        bl.setRed_Blood_Cell(5);
+                bl.setMean_Corpuscular_Volume(5);
 //bl.setBlID(5);
-//bl.setMedical_Test_Id(5);
-//        t.addBloodyTestdata(bl);
+bl.setMedical_Test_Id(5);
+        t.addBloodyTestdata(bl);
 
         //List<BloodTests>
-                
+//        PatientTest pt = new PatientTest(1, "DuyAnh", "all right", 10);
+//                t.addTest(pt);
     }
 }
 

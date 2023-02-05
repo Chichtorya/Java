@@ -20,6 +20,17 @@ public class BloodTests {
 
     public BloodTests() {
     }
+    
+    public BloodTests( int Medical_Test_Id, double Red_Blood_Cell, double White_Blood_Cell, double Platelets, float Hemoglobin, float Hemattocrit, int Mean_Corpuscular_Volume) {
+   
+        this.Medical_Test_Id = Medical_Test_Id;
+        this.Red_Blood_Cell = Red_Blood_Cell;
+        this.White_Blood_Cell = White_Blood_Cell;
+        this.Platelets = Platelets;
+        this.Hemoglobin = Hemoglobin;
+        this.Hemattocrit = Hemattocrit;
+        this.Mean_Corpuscular_Volume = Mean_Corpuscular_Volume;
+    }
 
     public BloodTests(int BlID, int Medical_Test_Id, double Red_Blood_Cell, double White_Blood_Cell, double Platelets, float Hemoglobin, float Hemattocrit, int Mean_Corpuscular_Volume) {
         this.BlID = BlID;

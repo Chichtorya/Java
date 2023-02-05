@@ -31,6 +31,26 @@ public class BiochemistryTests {
 
     public BiochemistryTests() {
     }
+    public BiochemistryTests( int MedicalTestId, float Fasting, float pp, float Urea, float S_Creatinine, float Sodium, float Potassium, float Choloride, float TotalCalcium, float UricAcid, float TotalBilirubin, float AlkalinePhosphate, float TotalProtein, float Albumin, float TotalCholesterol, float Triglyceride, float ADA) {
+ 
+        this.MedicalTestId = MedicalTestId;
+        this.Fasting = Fasting;
+        this.pp = pp;
+        this.Urea = Urea;
+        this.S_Creatinine = S_Creatinine;
+        this.Sodium = Sodium;
+        this.Potassium = Potassium;
+        this.Choloride = Choloride;
+        this.TotalCalcium = TotalCalcium;
+        this.UricAcid = UricAcid;
+        this.TotalBilirubin = TotalBilirubin;
+        this.AlkalinePhosphate = AlkalinePhosphate;
+        this.TotalProtein = TotalProtein;
+        this.Albumin = Albumin;
+        this.TotalCholesterol = TotalCholesterol;
+        this.Triglyceride = Triglyceride;
+        this.ADA = ADA;
+    }
 
     public BiochemistryTests(int BioID, int MedicalTestId, float Fasting, float pp, float Urea, float S_Creatinine, float Sodium, float Potassium, float Choloride, float TotalCalcium, float UricAcid, float TotalBilirubin, float AlkalinePhosphate, float TotalProtein, float Albumin, float TotalCholesterol, float Triglyceride, float ADA) {
         this.BioID = BioID;
