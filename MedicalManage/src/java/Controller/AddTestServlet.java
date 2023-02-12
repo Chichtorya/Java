@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package controller;
 
 import Dao.TestDao;
 import Model.PatientTest;
 import Model.TestObj.BiochemistryTests;
 import Model.TestObj.BloodTests;
 import Model.TestObj.ImmunoassTest;
+
+import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,6 +24,7 @@ import java.util.List;
  *
  * @author chich
  */
+@WebServlet(name = "AddTestServlet", urlPatterns = {"/AddTestServlet"})
 public class AddTestServlet extends HttpServlet {
 
     /**

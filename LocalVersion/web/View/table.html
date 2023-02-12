@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <table id="myTable">
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Column 4</th>
+            <th>Column 5</th>
+            <th>Options</th>
+        </tr>
+    </table>
+    <button id="addRowBtn">Add Row</button>
+    <script>
+        // Get the table element
+        var table = document.getElementById("myTable");
+        var addRowBtn = document.getElementById("addRowBtn");
+
+        // Add a new row to the table
+        var newRow = table.insertRow(-1);
+
+        // Add cells to the new row
+        var newCell1 = newRow.insertCell(0);
+        var newCell2 = newRow.insertCell(1);
+        var newCell3 = newRow.insertCell(2);
+        var newCell4 = newRow.insertCell(3);
+        var newCell5 = newRow.insertCell(4);
+        var newCell6 = newRow.insertCell(5);
+
+        // Add data to the cells
+        newCell1.innerHTML = "Data 1";
+        newCell2.innerHTML = "Data 2";
+        newCell3.innerHTML = "Data 3";
+        newCell4.innerHTML = "Data 4";
+        newCell5.innerHTML = "Data 5";
+
+        // Add a delete button and an update button to the options cell
+        var deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "Delete";
+        newCell6.appendChild(deleteBtn);
+
+        var updateBtn = document.createElement("button");
+        updateBtn.innerHTML = "Update";
+        newCell6.appendChild(updateBtn);
+
+        // Attach an event listener to the delete button
+        deleteBtn.addEventListener("click", function () {
+            // Delete the corresponding row
+            table.deleteRow(this.parentNode.parentNode.rowIndex);
+        });
+
+        // Attach an event listener to the update button
+        updateBtn.addEventListener("click", function () {
+            // Get the row data
+            var row = this.parentNode.parentNode;
+            var cells = row.cells;
+            var data = [];
+            for (var i = 0; i < cells.length - 1; i++) {
+                data.push(cells[i].innerHTML);
+            }
+            // Update the row data
+            for (var i = 0; i < cells.length - 1; i++) {
+                cells[i].innerHTML = prompt("Enter the new data for column " + (i + 1), data[i]);
+            }
+        });
+
+        // Attach an event listener to the button
+        addRowBtn.addEventListener("click", function () {
+            // Add a new row to the table
+            var newRow = table.insertRow(-1);
+
+            // Add cells to the new row
+            for (var i = 0; i < 5; i++) {
+                var newCell = newRow.insertCell(i);
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "col" + (i + 1);
+                input.placeholder = "Column " + (i + 1);
+                newCell.appendChild(input);
+            }
+            var newCell = newRow.insertCell(5);
+
+            // Add delete button and update button to the options cell
+            var deleteBtn = document.createElement("button");
+            deleteBtn.innerHTML = "Delete";
+            newCell.appendChild(deleteBtn);
+
+            var updateBtn = document.createElement("button");
+            updateBtn.innerHTML = "Update";
+            newCell.appendChild(updateBtn);
+
+            // Attach an event listener to the delete button
+            deleteBtn.addEventListener("click", function () {
+                table.deleteRow(this.parentNode.parentNode.rowIndex);
+            });
+
+            // Attach an event listener to the update button
+            updateBtn.addEventListener("click", function () {
+                // Get the row data
+                var row = this.parentNode.parentNode;
+                var cells = row.cells;
+                var data = [];
+                for (var i = 0; i < cells.length - 1; i++) {
+                    data.push(cells[i].firstChild.value);
+                }
+                // Update the row data
+                for (var i = 0; i < cells.length - 1; i++) {
+                    cells[i].firstChild.value = prompt("Enter the new data for column " + (i + 1), data[i]);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

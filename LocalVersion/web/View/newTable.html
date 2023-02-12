@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Column 4</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+            <td>Value 1</td>
+            <td>Value 2</td>
+            <td>Value 3</td>
+            <td>Value 4</td>
+            <td>
+                <select>
+                    <option>Update Row</option>
+                    <option>Delete Row</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <script>
+        function addNewRow() {
+            var newRow = document.createElement('tr');
+            var newCol1 = document.createElement('td');
+            var newCol2 = document.createElement('td');
+            var newCol3 = document.createElement('td');
+            var newCol4 = document.createElement('td');
+            var newCol5 = document.createElement('td');
+
+            newCol1.innerHTML = "New Value 1";
+            newCol2.innerHTML = "New Value 2";
+            newCol3.innerHTML = "New Value 3";
+            newCol4.innerHTML = "New Value 4";
+            newCol5.innerHTML = '<select><option>Update Row</option><option>Delete Row</option></select>';
+
+            newRow.appendChild(newCol1);
+            newRow.appendChild(newCol2);
+            newRow.appendChild(newCol3);
+            newRow.appendChild(newCol4);
+            newRow.appendChild(newCol5);
+
+            document.getElementsByTagName('table')[0].appendChild(newRow);
+        }                 
+    </script>
+</body>
+
+</html>
