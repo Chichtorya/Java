@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.UserProfileDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,38 +12,36 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.UserProfile;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import model.Major;
+import model.Role;
+import model.User;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 
 public class LoginServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String Gmail = request.getParameter("Gmail");
-        String Password = request.getParameter("Password");
-        UserProfileDAO dao = new UserProfileDAO();
-        UserProfile userAccount = null;
-        try {
-            userAccount = dao.GetUserData(Gmail, Password);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+          try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet HomeServlet</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet HomeServlet at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        if (userAccount != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("Account", userAccount);
-            response.sendRedirect("Home.jsp");
-        } else {
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,7 +56,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     /**
@@ -72,7 +70,35 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+      String Gmail = request.getParameter("Gmail");
+        String Password = request.getParameter("Password");
+        UserDAO dao = new UserDAO();
+        ArrayList<Role> role = dao.getAllRole();
+        ArrayList<Major> major = dao.getAllMajor();
+        
+        User userAccount = dao.checkUser(Gmail, Password);
+        if (userAccount != null) {
+            if (userAccount.getIsBlock() == 1) {
+                HttpSession session = request.getSession();
+                session.setAttribute("account", userAccount);
+                 session.setAttribute("ListRole", role);
+                 session.setAttribute("ListMajor", major);
+                if(userAccount.getRole().getId()==1){
+                    response.sendRedirect("/drashboard");
+                }else{
+                response.sendRedirect("/home");
+                }
+            } else {
+                String ms = "* Your account was blocked";
+                request.setAttribute("ms", ms);
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            }
+        } else {
+            String ms = "* Gmail or password not correct";
+            request.setAttribute("gmail", Gmail);
+            request.setAttribute("ms", ms);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
     }
 
     /**

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DbContext {
     protected Connection connection;
     public  DbContext() {
-        String jdbcURL = "jdbc:mysql://localhost:3306/G6";
+        String jdbcURL = "jdbc:mysql://localhost:3306/G62";
         String jdbcUsername = "root";
         String jdbcPassword = "12345";
         try {
@@ -25,8 +25,12 @@ public class DbContext {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) {
-        DbContext con = new DbContext();
-        System.out.println(con);
-    }
+//    public static void main(String[] args) {
+//       String pass = "abc sad";
+//        if(pass.length()>20){
+//            System.out.println("a");
+//        }else{
+//            System.out.println("b");
+//        }
+//    }
 }
