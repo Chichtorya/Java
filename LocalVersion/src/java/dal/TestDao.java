@@ -74,15 +74,16 @@ public class TestDao extends DbContext {
         return 99;
     }
 
-    public List<BloodTests> getBloodTestses(int idTest) {
-        List<BloodTests> list = new ArrayList<>();
-        String sql = "select * from Blood_Test where Medical_Test_Id = ? ; ";
+    public BloodTests getBloodTestses(int idUser, int idTest) {
+   BloodTests BlT = new BloodTests();
+        String sql = "SELECT * FROM Blood_Test WHERE id_user = ? AND id_test = ? ; ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, idTest);
+             st.setInt(1, idUser);
+        st.setInt(2, idTest);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                BloodTests BlT = new BloodTests();
+             
                 BlT.setBlID(rs.getInt("Id"));
                 //    BlT.setMedical_Test_Id(rs.getInt("Medical_Test_Id"));
                 BlT.setRed_Blood_Cell(rs.getInt("Red_Blood_Cell"));
@@ -92,12 +93,12 @@ public class TestDao extends DbContext {
                 BlT.setHemattocrit(rs.getInt("Hematocrit"));
                 BlT.setMean_Corpuscular_Volume(rs.getInt("Mean_Corpuscular_Volume"));
 
-                list.add(BlT);
+             
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return list;
+        return BlT;
 
     }
 

@@ -64,7 +64,7 @@
         <form action="AddTestServlet?id=<%= id%>&price=<%= test%>" method="post">
       <div>   
                   <h2>Immunoass Test </h2> 
-                    <h4><%--= Pa.getId()--%></h4> 
+                    <h4><%--= Pa.getId()--%></h4>  <input type="checkbox" name="test" value="Imm"/>
                     Digoxin                                 <input type="number" step ="0.01" min= "0" name="Digoxin" value="0"/> <br>
                     Estradiol                               <input type="number" step ="0.01" min= "0" name="Estradiol" value="0"/><br>
                     Ferritin                                 <input type="number" step ="0.01" min= "0" name="Ferritin" value="0"/><br>

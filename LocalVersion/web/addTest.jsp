@@ -11,9 +11,11 @@
 <%@page import="model.User"%>
 <%@page import="dal.MedicalExamDao"%>
 <%@page import="dal.UserDAO"%>
+<%@page import="dal.TestDao"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,8 +55,13 @@
 
         <%
              UserDAO user = new UserDAO();
-
-
+BloodTests bloodTest=   new BloodTests();
+MedicalExamDao md = new MedicalExamDao();
+ TestDao td = new TestDao();
+ int latestExamId = md.getLatestExaminationIdForUser(Integer.parseInt(request.getParameter("id")));
+          int idOfTest =  td.getLatestTest(latestExamId).getPaID();
+ 
+bloodTest = td.getBloodTestses(Integer.parseInt(request.getParameter("id")), idOfTest);
   String test = (String)request.getAttribute("money");
     User obj =  user.getsmallUserById(Integer.parseInt(request.getParameter("id")));
 
@@ -66,10 +73,29 @@ if(test == null) {
             <h1>Hồ Sơ bệnh nhân</h1>
 
             <p>Name: <%=  obj.getName()%></p>
-          
+
 
             <h3>test <%=  test%></h3><br>
-
+            <c:if test="${not empty bloodTest}">
+                <table>
+                    <tr>
+                        <th>Red Blood Cell</th>
+                        <th>White Blood Cell</th>
+                        <th>Platelets</th>
+                        <th>Hemoglobin</th>
+                        <th>Hematocrit</th>
+                        <th>Mean Corpuscular Volume</th>
+                    </tr>
+                    <tr>
+                        <td>${bloodTest.Red_Blood_Cell}</td>
+                        <td>${bloodTest.White_Blood_Cell}</td>
+                        <td>${bloodTest.Platelets}</td>
+                        <td>${bloodTest.Hemoglobin}</td>
+                        <td>${bloodTest.Hematocrit}</td>
+                        <td>${bloodTest.Mean_Corpuscular_Volume}</td>
+                    </tr>
+                </table>
+            </c:if>
 
             <form action="controlTestServlet?action=bl" method="post">
                 <h3>check Blood test <input type="submit" name="sting" placeholder="check Blood test"/></h3><input type="hidden" value=<%=obj.getId()%> name="id"><input type="hidden" value=<%=  test%> name="price">
