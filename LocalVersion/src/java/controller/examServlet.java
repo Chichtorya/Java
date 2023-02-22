@@ -3,21 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
-import jakarta.servlet.annotation.WebServlet;
+
+import dal.MedicalExamDao;
+import dal.TestDao;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Patien_Info;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import model.Examination;
+import model.PatientTest;
 
 /**
  *
  * @author chich
  */
-@WebServlet(name = "controlTestServlet", urlPatterns = {"/controlTestServlet"})
-public class controlTestServlet extends HttpServlet {
+@WebServlet(name = "examServlet", urlPatterns = {"/examServlet"})
+public class examServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +43,10 @@ public class controlTestServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet controlTestServlet</title>");            
+            out.println("<title>Servlet examServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet controlTestServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet examServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,27 +78,46 @@ public class controlTestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String action = request.getParameter("action");
-             String id = request.getParameter("id");
-         
-                
-                 request.setAttribute("id", id);
-             if(id == null){request.getRequestDispatcher("Home.jsp").forward(request, response);}
+        Examination exam = new Examination();
+        MedicalExamDao md = new MedicalExamDao();
+        String check = request.getParameter("check");
+        if ("no".equals(check)) {
+            exam.setDoctor_In_Charge(Integer.parseInt(request.getParameter("doctor_In_Charge")));
+            exam.setVisitTime(java.sql.Timestamp.valueOf(request.getParameter("visitTime").replace("T", " ") + ":00"));
 
+            exam.setId_user(Integer.parseInt(request.getParameter("id")));
+            exam.setDisease_Description(request.getParameter("disease_Description"));
+            exam.setDiagnose(request.getParameter("diagnose"));
+            exam.setConclusion(request.getParameter("conclusion"));
+            exam.setTotalPrice(Double.parseDouble(request.getParameter("totalPrice")));
+            exam.setSatatus(1);
+            md.newMedicalExam(exam);
+                        request.getRequestDispatcher("Home.jsp").forward(request, response);
+        } else if ("yes".equals(check)) {
+            LocalDateTime now = LocalDateTime.now();  
+            exam.setDoctor_In_Charge(Integer.parseInt("1"));
+            exam.setVisitTime(java.sql.Timestamp.valueOf(now));
+            exam.setId_user(Integer.parseInt(request.getParameter("id")));
+            exam.setSatatus(0);
+            md.newMedicalExam(exam);
+               
+
+    int latestExamId = md.getLatestExaminationIdForUser(Integer.parseInt(request.getParameter("id")));
+    TestDao td = new TestDao();
+            PatientTest pt  = new PatientTest();
+            pt.setId_exam(latestExamId);
+            td.addTest(pt);
       
-             if (null != action) switch (action) {
-            case "bl":
-                request.getRequestDispatcher("addBloodTest.jsp").forward(request, response);
-                break;
-            case "bi":
-                request.getRequestDispatcher("addBioTest.jsp").forward(request, response);
-                break;
-            case "im":
-                request.getRequestDispatcher("addImmTest.jsp").forward(request, response);
-                break;
-            default:
-                break;
+            int idt =  td.getLatestTest(latestExamId).getPaID();
+            if (String.valueOf(idt) == null) {
+                request.getRequestDispatcher("gg.jsp").forward(request, response);
+            }
+          
+            request.setAttribute("id", request.getParameter("id"));
+             
+            request.getRequestDispatcher("addTest.jsp").forward(request, response);
         }
+
     }
 
     /**

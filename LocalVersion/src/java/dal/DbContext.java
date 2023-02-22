@@ -30,7 +30,7 @@ public class DbContext {
    
    //demoFunc
     public DbContext() {
-        String jdbcURL = "jdbc:mysql://localhost:3306/g62demoIter";
+        String jdbcURL = "jdbc:mysql://localhost:3306/g63";
         String jdbcUsername = "root";
         String jdbcPassword = "sasa";
        

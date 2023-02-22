@@ -4,7 +4,6 @@
  */
 package dal;
 
-
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

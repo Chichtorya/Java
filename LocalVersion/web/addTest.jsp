@@ -8,7 +8,9 @@
 <%@page import="model.ImmunoassTest"%>
 
 <%@page import="jakarta.servlet.http.HttpSession"%>
-<%@page import="model.Patien_Info"%>
+<%@page import="model.User"%>
+<%@page import="dal.MedicalExamDao"%>
+<%@page import="dal.UserDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
@@ -46,124 +48,59 @@
     </style>
 
     <body>
+        <jsp:include page="header.jsp"></jsp:include>
         <%-- Patien_Info Pa = (Patien_Info) request.getAttribute("patient"); --%>
 
         <%
-        Patien_Info obj = new Patien_Info(4,"duyanh","28/02/2002","Ha Noi");// Create the object
+             UserDAO user = new UserDAO();
 
-        
-      Map<String, String> bl = (  Map<String, String>) request.getAttribute("bl");
-      Map<String, String> bi = (  Map<String, String>) request.getAttribute("bi");
-      Map<String, String> im = (  Map<String, String>) request.getAttribute("Im");
-      
 
+  String test = (String)request.getAttribute("money");
+    User obj =  user.getsmallUserById(Integer.parseInt(request.getParameter("id")));
+
+if(test == null) {
+    test = "0";
+}
         %>
+        <div style="  margin-bottom: 20px;">
+            <h1>Hồ Sơ bệnh nhân</h1>
 
-        <h1>Hồ Sơ bệnh nhân</h1>
+            <p>Name: <%=  obj.getName()%></p>
+          
 
-        <h3>id <%= obj.getId()%></h3>
-       <h3>Tên <%= obj.getName()%></h3>
-        <h3>Tuổi <%=  obj.getDate_Of_Birth()%></h3>
-        <h3>Address <%=  obj.getAddress()%></h3><br>
-
-
-
-        <table style="display:inline-table;">
-            <tr>
-                <td>
-                    <table>
-                        <%
-                         if (bl != null) {
-                                for (Map.Entry<String, String> entry : bl.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-                        %>
-                        <tr>
-                            <th><%= key  %></th>
-
-                        </tr>
-                        <tr>
-
-                            <td><%=  value  %></td>
-                        </tr>
-                        <% }  %>
-                           <%   }%>
-                    </table>
-                </td>
-                <td>
-                    <table>
-                        <%       if (bi != null) {
-for (Map.Entry<String, String> entry : bi.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-                        %>
-                        <tr>
-                            <th><%= key %></th>
-
-                        </tr>
-                        <tr>
-
-                            <td><%=  value %></td>
-                        </tr>
-                        <%      
-                            }}%>
-                    </table>
-                </td>
-                <td>
-                    <table>
-                        <%   if (im != null) {
-for (Map.Entry<String, String> entry : im.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-                        %>
-                        <tr>
-                            <th><%= key  %></th>
-
-                        </tr>
-                        <tr>
-
-                            <td><%=  value %></td>
-                        </tr>
-                        <% }  }%>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <%--
-        Patien_Info obj = new Patien_Info("duyanh","28/02/2002","Ha Noi");// Create the object
-        session.setAttribute("myObject", obj);
-        --%>
-
-  
+            <h3>test <%=  test%></h3><br>
 
 
-        <form action="controlTestServlet?action=bl&id=<%=obj.getId()%>&name=<%=obj.getName()%>" method="post">
-            <input type="submit" name="sting" placeholder="check Blood test"/>
-        </form>
-        <form action="controlTestServlet?action=bi" method="post">
-            <input type="submit"  placeholder="check Biochemistry test"/>
-        </form>
-        <form action="controlTestServlet?action=im" method="post">
-            <input type="submit"  placeholder="check Immunoass test"/>
-        </form>
-        <!--        <form action="addBloodTest.jsp" method="post">Blood Tests <input type="hidden" name="pt" value= "" /><input type='submit' value= Pa /></form>
-         <form action="addBioTest.jsp">Biochemistry Tests <input type='submit' value= Pa /></form>
-         <form action="addImmTest.jsp">Immunoass Tests  <input type='submit' value= Pa /></form>-->
+            <form action="controlTestServlet?action=bl" method="post">
+                <h3>check Blood test <input type="submit" name="sting" placeholder="check Blood test"/></h3><input type="hidden" value=<%=obj.getId()%> name="id"><input type="hidden" value=<%=  test%> name="price">
+            </form>
+
+            <form action="controlTestServlet?action=bi&id=<%=obj.getId()%>&price=<%=  test%>" method="post">
+                <h3>check Biochemistry test <input type="submit"  placeholder="check Biochemistry test"/></h3> <input type="hidden" value=<%=obj.getId()%> name="id"><input type="hidden" value=<%=  test%> name="price">
+            </form>
+            <form action="controlTestServlet?action=im&id=<%=obj.getId()%>&price=<%=  test%>" method="post">
+                <h3>check Immunoass test <input type="submit"  placeholder="check Immunoass test"/></h3> <input type="hidden" value=<%=obj.getId()%> name="id"><input type="hidden" value=<%=  test%> name="price">
+            </form>
+            <!--        <form action="addBloodTest.jsp" method="post">Blood Tests <input type="hidden" name="pt" value= "" /><input type='submit' value= Pa /></form>
+             <form action="addBioTest.jsp">Biochemistry Tests <input type='submit' value= Pa /></form>
+             <form action="addImmTest.jsp">Immunoass Tests  <input type='submit' value= Pa /></form>-->
 
 
 
-        <form style="     display: flex;
-              flex-direction : column ; " action="AddTestServlet" method="post">
+            <form style="     display: flex;
+                  flex-direction : column ; " action="AddTestServlet?action=null&id=<%=obj.getId()%>&name=<%=obj.getName()%>&price=<%=  test%>" method="post">
 
-            <h2>   Dortor:</h2><input type=" text" name="doctor" placeholder="Your name">
-            <h2>     Description:</h2><input type="text" name="decrip" rows="10" cols="100">
-            <h2>   Total price:</h2><input type="number" name="price" placeholder="free?" value ="0">
-            <br>
+                <h2>   Doctor:</h2><input type=" text" name="doctor" placeholder="Your name">
+                <h2>     Description:</h2><input type="text" name="decrip" rows="10" cols="100">
+                <h2>   </h2><input type="hidden" name="price" placeholder="free?" value =<%=test%>>
+                <br>
 
 
 
-            <input type="submit" value=" Update" class="block">
-        </form>
+                <input type="submit" value=" Update" class="block">
+            </form>
+        </div>
+
         <%--
                                     for (BloodTests Bl : listPa) {
         --%>
@@ -174,5 +111,6 @@ for (Map.Entry<String, String> entry : im.entrySet()) {
              <h4><%= bl.getHemoglobin()%></h4> 
              <h4><%= bl.getHemattocrit()%></h4> 
              <h4><%= bl.getMean_Corpuscular_Volume()%></h4> --%>
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

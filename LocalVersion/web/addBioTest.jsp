@@ -50,8 +50,9 @@
         }
     </style>
             <%
-  String name = (String) request.getAttribute("name");
-  String id = (String) request.getAttribute("id");
+
+String id = (String) request.getParameter("id");
+    String test = (String)  request.getParameter("price");
     %>
         <h1>Hồ Sơ bệnh nhân</h1>
         
@@ -59,7 +60,7 @@
        
 
  
-        <form action="AddTestServlet?id=<%= id%>" method="post">
+        <form action="AddTestServlet?id=<%= id%>&price=<%= test%>" method="post">
             <div>   
                 <h2>Biochemistry Tests </h2>   <input type="checkbox" name="test" value="Bio"/> <br>
                 <h4><%--= Pa.getId()--%></h4> 
@@ -71,6 +72,7 @@
                 Potassium                             <input type="number" step ="0.01" min= "0" name="Potassium" value="0"/><br>
                 Choloride                              <input type="number" step ="0.01" min= "0" name="Choloride" value="0"/> <br>
                 Total Calcium                        <input type="number" step ="0.01" min= "0" name="TCalcium" value="0"/><br>
+                S_Calcium                             <input type="number" step ="0.01" min= "0" name="Scardium" value="0"/><br>
                 UricAcid                                 <input type="number" step ="0.01" min= "0" name="UricAcid" value="0"/><br>
                 Total Bilirubin                        <input type="number" step ="0.01" min= "0" name="TBilirubin" value="0"/><br>
                 Alkaline Phosphate               <input type="number" step ="0.01" min= "0" name="AP" value="0"/><br>

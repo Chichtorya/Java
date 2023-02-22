@@ -11,6 +11,7 @@ package model;
 public class ImmunoassTest {
    private int ImID;
    private int id_user;
+   private int id_test;
    private float  Digoxin;
    private float Estradiol;
    private float Ferritin;
@@ -26,23 +27,11 @@ public class ImmunoassTest {
 
     public ImmunoassTest() {
     }
-    public ImmunoassTest( int id_user, float Digoxin, float Estradiol, float Ferritin, float FolicAcid, float Progesterone, float Prolactin, float TroponinT, float Testosterone, float TotalPSA) {
 
-        this.id_user = id_user;
-        this.Digoxin = Digoxin;
-        this.Estradiol = Estradiol;
-        this.Ferritin = Ferritin;
-        this.FolicAcid = FolicAcid;
-        this.Progesterone = Progesterone;
-        this.Prolactin = Prolactin;
-        this.TroponinT = TroponinT;
-        this.Testosterone = Testosterone;
-        this.TotalPSA = TotalPSA;
-    }
-
-    public ImmunoassTest(int ImID, int id_user, float Digoxin, float Estradiol, float Ferritin, float FolicAcid, float Progesterone, float Prolactin, float TroponinT, float Testosterone, float TotalPSA) {
+    public ImmunoassTest(int ImID, int id_user, int id_test, float Digoxin, float Estradiol, float Ferritin, float FolicAcid, float Progesterone, float Prolactin, float TroponinT, float Testosterone, float TotalPSA) {
         this.ImID = ImID;
         this.id_user = id_user;
+        this.id_test = id_test;
         this.Digoxin = Digoxin;
         this.Estradiol = Estradiol;
         this.Ferritin = Ferritin;
@@ -54,6 +43,48 @@ public class ImmunoassTest {
         this.TotalPSA = TotalPSA;
     }
 
+    public ImmunoassTest(float Digoxin, float Estradiol, float Ferritin, float FolicAcid, float Progesterone, float Prolactin, float TroponinT, float Testosterone, float TotalPSA) {
+        this.Digoxin = Digoxin;
+        this.Estradiol = Estradiol;
+        this.Ferritin = Ferritin;
+        this.FolicAcid = FolicAcid;
+        this.Progesterone = Progesterone;
+        this.Prolactin = Prolactin;
+        this.TroponinT = TroponinT;
+        this.Testosterone = Testosterone;
+        this.TotalPSA = TotalPSA;
+    }
+
+    public ImmunoassTest(int id_user, int id_test, float Digoxin, float Estradiol, float Ferritin, float FolicAcid, float Progesterone, float Prolactin, float TroponinT, float Testosterone, float TotalPSA) {
+        this.id_user = id_user;
+        this.id_test = id_test;
+        this.Digoxin = Digoxin;
+        this.Estradiol = Estradiol;
+        this.Ferritin = Ferritin;
+        this.FolicAcid = FolicAcid;
+        this.Progesterone = Progesterone;
+        this.Prolactin = Prolactin;
+        this.TroponinT = TroponinT;
+        this.Testosterone = Testosterone;
+        this.TotalPSA = TotalPSA;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public int getId_test() {
+        return id_test;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
+    public void setId_test(int id_test) {
+        this.id_test = id_test;
+    }
+    
     public int getImID() {
         return ImID;
     }

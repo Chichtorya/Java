@@ -12,6 +12,7 @@ public class BiochemistryTests {
 
     private int BioID;
     private int id_user;
+    private int id_test;
     private float Fasting;
     private float pp;
     private float Urea;
@@ -21,7 +22,7 @@ public class BiochemistryTests {
     private float Chloride;
     private float TotalCalcium;
     private float S_Calcium;
-        private float UricAcid;
+    private float UricAcid;
     private float TotalBilirubin;
     private float AlkalinePhosphate;
     private float TotalProtein;
@@ -30,8 +31,7 @@ public class BiochemistryTests {
     private float Triglyceride;
     private float ADA;
 
-    public BiochemistryTests(int id_user, float Fasting, float pp, float Urea, float S_Creatinine, float Sodium, float Potassium, float Chloride, float TotalCalcium, float S_Calcium, float UricAcid, float TotalBilirubin, float AlkalinePhosphate, float TotalProtein, float Albumin, float TotalCholesterol, float Triglyceride, float ADA) {
-        this.id_user = id_user;
+    public BiochemistryTests(float Fasting, float pp, float Urea, float S_Creatinine, float Sodium, float Potassium, float Chloride, float TotalCalcium, float S_Calcium, float UricAcid, float TotalBilirubin, float AlkalinePhosphate, float TotalProtein, float Albumin, float TotalCholesterol, float Triglyceride, float ADA) {
         this.Fasting = Fasting;
         this.pp = pp;
         this.Urea = Urea;
@@ -51,8 +51,69 @@ public class BiochemistryTests {
         this.ADA = ADA;
     }
 
-  
+    public BiochemistryTests(int id_user, int id_test, float Fasting, float pp, float Urea, float S_Creatinine, float Sodium, float Potassium, float Chloride, float TotalCalcium, float S_Calcium, float UricAcid, float TotalBilirubin, float AlkalinePhosphate, float TotalProtein, float Albumin, float TotalCholesterol, float Triglyceride, float ADA) {
+        this.id_user = id_user;
+        this.id_test = id_test;
+        this.Fasting = Fasting;
+        this.pp = pp;
+        this.Urea = Urea;
+        this.S_Creatinine = S_Creatinine;
+        this.Sodium = Sodium;
+        this.Potassium = Potassium;
+        this.Chloride = Chloride;
+        this.TotalCalcium = TotalCalcium;
+        this.S_Calcium = S_Calcium;
+        this.UricAcid = UricAcid;
+        this.TotalBilirubin = TotalBilirubin;
+        this.AlkalinePhosphate = AlkalinePhosphate;
+        this.TotalProtein = TotalProtein;
+        this.Albumin = Albumin;
+        this.TotalCholesterol = TotalCholesterol;
+        this.Triglyceride = Triglyceride;
+        this.ADA = ADA;
+    }
 
+    public BiochemistryTests(int BioID, int id_user, int id_test, float Fasting, float pp, float Urea, float S_Creatinine, float Sodium, float Potassium, float Chloride, float TotalCalcium, float S_Calcium, float UricAcid, float TotalBilirubin, float AlkalinePhosphate, float TotalProtein, float Albumin, float TotalCholesterol, float Triglyceride, float ADA) {
+        this.BioID = BioID;
+        this.id_user = id_user;
+        this.id_test = id_test;
+        this.Fasting = Fasting;
+        this.pp = pp;
+        this.Urea = Urea;
+        this.S_Creatinine = S_Creatinine;
+        this.Sodium = Sodium;
+        this.Potassium = Potassium;
+        this.Chloride = Chloride;
+        this.TotalCalcium = TotalCalcium;
+        this.S_Calcium = S_Calcium;
+        this.UricAcid = UricAcid;
+        this.TotalBilirubin = TotalBilirubin;
+        this.AlkalinePhosphate = AlkalinePhosphate;
+        this.TotalProtein = TotalProtein;
+        this.Albumin = Albumin;
+        this.TotalCholesterol = TotalCholesterol;
+        this.Triglyceride = Triglyceride;
+        this.ADA = ADA;
+    }
+
+    public BiochemistryTests() {
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
+    public void setId_test(int id_test) {
+        this.id_test = id_test;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public int getId_test() {
+        return id_test;
+    }
 
     public void setUser_Id(int id_user) {
         this.id_user = id_user;
@@ -66,22 +127,12 @@ public class BiochemistryTests {
         this.S_Calcium = S_Calcium;
     }
 
- 
-
     public float getChloride() {
         return Chloride;
     }
 
     public float getS_Calcium() {
         return S_Calcium;
-    }
-
-
-
-
-
-
-    public BiochemistryTests() {
     }
 
     public int getBioID() {

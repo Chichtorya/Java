@@ -24,6 +24,13 @@ public class Patien_Info {
         this.address = address;
     }
 
+    public Patien_Info(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    
+
     public Patien_Info(int id, String name, String date_Of_Birth, String address) {
         this.id = id;
         this.name = name;

@@ -49,18 +49,21 @@
             margin-top:20px;
         }
     </style>
-  <body>
+      <body>
             <%
-  String name = (String) request.getAttribute("name");
-  String id = (String) request.getAttribute("id");
+
+  String id = (String) request.getParameter("id");
+    String test = (String)  request.getParameter("price");
     %>
         <h1>Hồ Sơ bệnh nhân</h1>
         
-       <h3>Tên <%= id%></h3>
+       <h3>Tên <%= test%></h3>
        
-<form action="AddTestServlet?id=<%= id%>" method="post">
+
+ 
+        <form action="AddTestServlet?id=<%= id%>&price=<%= test%>" method="post">
       <div>   
-                  <h2>Immunoass Test </h2> <input type="checkbox" name="test" value="Imm"/> <br>
+                  <h2>Immunoass Test </h2> 
                     <h4><%--= Pa.getId()--%></h4> 
                     Digoxin                                 <input type="number" step ="0.01" min= "0" name="Digoxin" value="0"/> <br>
                     Estradiol                               <input type="number" step ="0.01" min= "0" name="Estradiol" value="0"/><br>

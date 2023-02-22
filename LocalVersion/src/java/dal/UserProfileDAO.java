@@ -204,7 +204,7 @@ public class UserProfileDAO extends DbContext implements Serializable {
         UserProfileDAO test = new UserProfileDAO();
         //System.out.println(test.CreateAccount("khanh","123"));
         //System.out.println(test.DeleteAccountByGmail("abc"));
-        System.out.println(test.SearchUser("kha"));
+        System.out.println(test.SearchUser("1"));
         //System.out.println(test.GetUserData("khanh", "123"));
     }
 }

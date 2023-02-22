@@ -11,39 +11,69 @@ package model;
 public class BloodTests {
     private int BlID;
     private int id_user;
+    private int id_test;
     private float Red_Blood_Cell;
     private float White_Blood_Cell;
     private float Platelets;
     private float Hemoglobin ;
     private float Hemattocrit ;
     private int Mean_Corpuscular_Volume;
+
+    public BloodTests() {
+    }
+
+    public BloodTests(int BlID, int id_user, int id_test, float Red_Blood_Cell, float White_Blood_Cell, float Platelets, float Hemoglobin, float Hemattocrit, int Mean_Corpuscular_Volume) {
+        this.BlID = BlID;
+        this.id_user = id_user;
+        this.id_test = id_test;
+        this.Red_Blood_Cell = Red_Blood_Cell;
+        this.White_Blood_Cell = White_Blood_Cell;
+        this.Platelets = Platelets;
+        this.Hemoglobin = Hemoglobin;
+        this.Hemattocrit = Hemattocrit;
+        this.Mean_Corpuscular_Volume = Mean_Corpuscular_Volume;
+    }
+
+    public BloodTests(float Red_Blood_Cell, float White_Blood_Cell, float Platelets, float Hemoglobin, float Hemattocrit, int Mean_Corpuscular_Volume) {
+        this.Red_Blood_Cell = Red_Blood_Cell;
+        this.White_Blood_Cell = White_Blood_Cell;
+        this.Platelets = Platelets;
+        this.Hemoglobin = Hemoglobin;
+        this.Hemattocrit = Hemattocrit;
+        this.Mean_Corpuscular_Volume = Mean_Corpuscular_Volume;
+    }
+
+    public BloodTests(int id_user, int id_test, float Red_Blood_Cell, float White_Blood_Cell, float Platelets, float Hemoglobin, float Hemattocrit, int Mean_Corpuscular_Volume) {
+        this.id_user = id_user;
+        this.id_test = id_test;
+        this.Red_Blood_Cell = Red_Blood_Cell;
+        this.White_Blood_Cell = White_Blood_Cell;
+        this.Platelets = Platelets;
+        this.Hemoglobin = Hemoglobin;
+        this.Hemattocrit = Hemattocrit;
+        this.Mean_Corpuscular_Volume = Mean_Corpuscular_Volume;
+    }
    
 
 
-    public BloodTests(int id_user, float Red_Blood_Cell, float White_Blood_Cell, float Platelets, float Hemoglobin, float Hemattocrit, int Mean_Corpuscular_Volume) {
-        this.id_user = id_user;
-        this.Red_Blood_Cell = Red_Blood_Cell;
-        this.White_Blood_Cell = White_Blood_Cell;
-        this.Platelets = Platelets;
-        this.Hemoglobin = Hemoglobin;
-        this.Hemattocrit = Hemattocrit;
-        this.Mean_Corpuscular_Volume = Mean_Corpuscular_Volume;
-     
+
+    public int getId_user() {
+        return id_user;
     }
 
-    public BloodTests(int BlID, int id_user, float Red_Blood_Cell, float White_Blood_Cell, float Platelets, float Hemoglobin, float Hemattocrit, int Mean_Corpuscular_Volume) {
-        this.BlID = BlID;
+    public int getId_test() {
+        return id_test;
+    }
+
+    public void setId_user(int id_user) {
         this.id_user = id_user;
-        this.Red_Blood_Cell = Red_Blood_Cell;
-        this.White_Blood_Cell = White_Blood_Cell;
-        this.Platelets = Platelets;
-        this.Hemoglobin = Hemoglobin;
-        this.Hemattocrit = Hemattocrit;
-        this.Mean_Corpuscular_Volume = Mean_Corpuscular_Volume;
- 
     }
-    public BloodTests() {
+
+    public void setId_test(int id_test) {
+        this.id_test = id_test;
     }
+
+  
 
  
 

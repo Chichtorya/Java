@@ -10,50 +10,75 @@ import java.util.Date;
  *
  * @author chich
  */
-public class MedicalExam {
-    private int MedicalExamID;
-    private int MedicalRecodID;
+public class Examination {
+    private int ExaminationID;
+
     private int Doctor_In_Charge;
+    private int id_user;
     private Date VisitTime;
-    private boolean IsTest;
     private String Disease_Description;
     private String Diagnose;
     private String Conclusion;
     private double TotalPrice;
-
-    public MedicalExam() {
+    private int satatus;
+    public Examination() {
     }
 
-    public MedicalExam(int MedicalRecodID, int Doctor_In_Charge, Date VisitTime, boolean IsTest, String Disease_Description, String Diagnose, String Conclusion, double TotalPrice) {
-        this.MedicalRecodID = MedicalRecodID;
+    public Examination(int ExaminationID, int Doctor_In_Charge, int id_user, Date VisitTime, String Disease_Description, String Diagnose, String Conclusion, double TotalPrice, int satatus) {
+        this.ExaminationID = ExaminationID;
         this.Doctor_In_Charge = Doctor_In_Charge;
+        this.id_user = id_user;
         this.VisitTime = VisitTime;
-        this.IsTest = IsTest;
+        this.Disease_Description = Disease_Description;
+        this.Diagnose = Diagnose;
+        this.Conclusion = Conclusion;
+        this.TotalPrice = TotalPrice;
+        this.satatus = satatus;
+    }
+
+    public Examination(int Doctor_In_Charge, int id_user, Date VisitTime, String Disease_Description, String Diagnose, String Conclusion, double TotalPrice, int satatus) {
+        this.Doctor_In_Charge = Doctor_In_Charge;
+        this.id_user = id_user;
+        this.VisitTime = VisitTime;
+        this.Disease_Description = Disease_Description;
+        this.Diagnose = Diagnose;
+        this.Conclusion = Conclusion;
+        this.TotalPrice = TotalPrice;
+        this.satatus = satatus;
+    }
+
+    public Examination(int Doctor_In_Charge, int id_user, Date VisitTime, String Disease_Description, String Diagnose, String Conclusion, double TotalPrice) {
+        this.Doctor_In_Charge = Doctor_In_Charge;
+        this.id_user = id_user;
+        this.VisitTime = VisitTime;
         this.Disease_Description = Disease_Description;
         this.Diagnose = Diagnose;
         this.Conclusion = Conclusion;
         this.TotalPrice = TotalPrice;
     }
 
-    public MedicalExam(int MedicalExamID, int MedicalRecodID, int Doctor_In_Charge, Date VisitTime, boolean IsTest, String Disease_Description, String Diagnose, String Conclusion, double TotalPrice) {
-        this.MedicalExamID = MedicalExamID;
-        this.MedicalRecodID = MedicalRecodID;
-        this.Doctor_In_Charge = Doctor_In_Charge;
-        this.VisitTime = VisitTime;
-        this.IsTest = IsTest;
-        this.Disease_Description = Disease_Description;
-        this.Diagnose = Diagnose;
-        this.Conclusion = Conclusion;
-        this.TotalPrice = TotalPrice;
+    public int getExaminationID() {
+        return ExaminationID;
     }
 
-    public int getMedicalExamID() {
-        return MedicalExamID;
+    public int getId_user() {
+        return id_user;
     }
 
-    public int getMedicalRecodID() {
-        return MedicalRecodID;
+    public int getSatatus() {
+        return satatus;
     }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
+    public void setSatatus(int satatus) {
+        this.satatus = satatus;
+    }
+
+  
+    
 
     public int getDoctor_In_Charge() {
         return Doctor_In_Charge;
@@ -63,13 +88,11 @@ public class MedicalExam {
         return VisitTime;
     }
 
-    public boolean IsTests() {
-        return IsTest;
-    }
-
     public String getDisease_Description() {
         return Disease_Description;
     }
+
+
 
     public String getDiagnose() {
         return Diagnose;
@@ -83,13 +106,10 @@ public class MedicalExam {
         return TotalPrice;
     }
 
-    public void setMedicalExamID(int MedicalExamID) {
-        this.MedicalExamID = MedicalExamID;
+    public void setExaminationID(int ExaminationID) {
+        this.ExaminationID = ExaminationID;
     }
 
-    public void setMedicalRecodID(int MedicalRecodID) {
-        this.MedicalRecodID = MedicalRecodID;
-    }
 
     public void setDoctor_In_Charge(int Doctor_In_Charge) {
         this.Doctor_In_Charge = Doctor_In_Charge;
@@ -99,9 +119,7 @@ public class MedicalExam {
         this.VisitTime = VisitTime;
     }
 
-    public void setIsTest(boolean IsTest) {
-        this.IsTest = IsTest;
-    }
+
 
     public void setDisease_Description(String Disease_Description) {
         this.Disease_Description = Disease_Description;

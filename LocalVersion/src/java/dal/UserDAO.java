@@ -4,7 +4,6 @@
  */
 package dal;
 
-
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -13,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Patien_Info;
 import model.Role;
 import model.User;
 
@@ -22,7 +20,6 @@ import model.User;
  * @author dell
  */
 public class UserDAO extends DbContext {
-    
 
     public Role getRoleById(int id) {
         String sql = "select * from Role where id = ?";
@@ -441,7 +438,26 @@ public class UserDAO extends DbContext {
         }
         return null;
     }
+  public User getsmallUserById(int id) {
+        String sql = "select * from Users where id = ?";
+          User user = null;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                 user = new User();
+            user.setId(rs.getInt("id"));
+            user.setName(rs.getString("name"));
 
+            user.setGender(rs.getInt("Gender"));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+ return user;
+    }
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
 //        User u = new User("abc", "ac", "0123123", "2010-10-10", 1, "12434", "122134", "hn", "abc34@gmail.com");
@@ -453,10 +469,7 @@ public class UserDAO extends DbContext {
 //dao.ChangePass("abc12344555", 2);
 //        User u = dao.checkUser("abc@gmail.com", "abc");
 //        System.out.println(u);
-        ArrayList<User> list = dao.getTop3User(2);
-        for (User a : list) {
-            System.out.println(a);
-        }
+        System.out.println(dao.getsmallUserById(28));
     }
 
 }

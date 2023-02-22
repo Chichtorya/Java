@@ -52,19 +52,22 @@
 
     <body>
             <%
-  String name = (String) request.getAttribute("name");
-  String id = (String) request.getAttribute("id");
+
+  String id = (String) request.getParameter("id");
+    String test = (String)  request.getParameter("price");
     %>
         <h1>Hồ Sơ bệnh nhân</h1>
         
-       <h3>Tên <%= id%></h3>
+    
+      
+       <h3>test <%= test%></h3>
        
 
  
         <form action="AddTestServlet?id=<%= id%>" method="post">
             <div>   
                 <h2>Blood Tests </h2>  <input type="checkbox" name="test" value="Blood"/> <br>
-                <h4><%--= Pa.getId()--%></h4> 
+                <h4><%--= Pa.getId()--%></h4>  <input type="hidden" value=<%=test%> name="price">
                 Red_Blood_Cell                   <input type="number" step ="0.01" min= "0" name="RedB" value="0"/> <br>
                 White_Blood_Cell                <input type="number" step ="0.01" min= "0" name="WhiteB" value="0"/><br>
                 Platelets                               <input type="number" step ="0.01" min= "0" name="Platelets" value="0"/><br>

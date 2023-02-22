@@ -3,21 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
-import jakarta.servlet.annotation.WebServlet;
+
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Patien_Info;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
- * @author chich
+ * @author dell
  */
-@WebServlet(name = "controlTestServlet", urlPatterns = {"/controlTestServlet"})
-public class controlTestServlet extends HttpServlet {
+@WebServlet(name = "DrashBoardServlet", urlPatterns = {"/drashboard"})
+public class DrashBoardServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +39,10 @@ public class controlTestServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet controlTestServlet</title>");            
+            out.println("<title>Servlet DrashBoardServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet controlTestServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DrashBoardServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +60,21 @@ public class controlTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        HttpSession session = request.getSession();
+//            User user = (User) session.getAttribute("account");
+//            if(user != null){
+//        UserDAO dao = new UserDAO();
+//        int nDoctors = dao.getNumberByRole(2);
+//        request.setAttribute("nDoctor", nDoctors);
+//        int nReception = dao.getNumberByRole(3);
+//        request.setAttribute("nReception", nReception);
+//        int nCustomer = dao.getNumberByRole(4);
+//        request.setAttribute("nCustomer", nCustomer);
+//        request.getRequestDispatcher("drashboard.jsp").forward(request, response);
+//            }else{
+//                response.sendRedirect("/login");
+//            }
+
     }
 
     /**
@@ -71,27 +88,7 @@ public class controlTestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String action = request.getParameter("action");
-             String id = request.getParameter("id");
-         
-                
-                 request.setAttribute("id", id);
-             if(id == null){request.getRequestDispatcher("Home.jsp").forward(request, response);}
-
-      
-             if (null != action) switch (action) {
-            case "bl":
-                request.getRequestDispatcher("addBloodTest.jsp").forward(request, response);
-                break;
-            case "bi":
-                request.getRequestDispatcher("addBioTest.jsp").forward(request, response);
-                break;
-            case "im":
-                request.getRequestDispatcher("addImmTest.jsp").forward(request, response);
-                break;
-            default:
-                break;
-        }
+        processRequest(request, response);
     }
 
     /**
