@@ -40,6 +40,20 @@ public class ScheduleDAO extends DbContext {
         }
         return list;
     }
+    public void UpdateSchedule(Schedule s, int id) {
+        String sql = "update Schedule set id_majors = ?, id_user = ?,descrip = ? , day= ? where id = ? ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(5, id);
+            st.setInt(1, s.getMajor().getId());
+            st.setInt(2, s.getUser().getId());
+            st.setString(3, s.getDescrip());
+            st.setString(4, s.getDatetime());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     public void updatePrice(int id, float price) {
         String sql = "update Type set price = ? where id = ?";
