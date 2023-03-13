@@ -51,43 +51,43 @@
                             <td>#</td>
                             <td>Fasting</td>
                             <td>${s.fasting}</td>
-                            <td>cell</td>
+                            <td> mg/dL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>pp</td>
                             <td>${s.pp}</td>
-                            <td>cell</td>
+                            <td>mmol/l </td>
                         </tr><!--
                         -->                                                <tr>
                             <td>#</td>
                             <td>Urea</td>
                             <td>${s.urea}</td>
-                            <td>cell</td>
+                            <td> mg/dL </td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>S_Creatinine</td>
                             <td>${s.s_Creatinine}</td>
-                            <td>cell</td>
+                            <td>mg/dL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Sodium</td>
                             <td>${s.sodium}</td>
-                            <td>cell</td>
+                            <td>mEq/L</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Potassium</td>
                             <td>${s.potassium}</td>
-                            <td>cell</td>
+                            <td>mEq/L</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Chloride</td>
                             <td>${s.chloride}</td>
-                            <td>cell</td>
+                            <td>mEq/L</td>
                         </tr>
                         <tr>
                             <td>#</td>
@@ -99,55 +99,55 @@
                             <td>#</td>
                             <td>S_Calcium</td>
                             <td>${s.s_Calcium}</td>
-                            <td>cell</td>
+                            <td>S_Calcium</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>UricAcid</td>
                             <td>${s.uricAcid}</td>
-                            <td>cell</td>
+                            <td>mg/dL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>TotalBilirubin</td>
                             <td>${s.totalBilirubin}</td>
-                            <td>cell</td>
+                            <td>mg/dL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>AlkalinePhosphate</td>
                             <td>${s.alkalinePhosphate}</td>
-                            <td>cell</td>
+                            <td>U/L</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>TotalProtein</td>
                             <td>${s.totalProtein}</td>
-                            <td>cell</td>
+                            <td>g/dl</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Albumin</td>
                             <td>${s.albumin}</td>
-                            <td>cell</td>
+                            <td> g/dL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>TotalCholesterol</td>
                             <td>${s.totalCholesterol}</td>
-                            <td>cell</td>
+                            <td>mmol/L</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Triglyceride</td>
                             <td>${s.triglyceride}</td>
-                            <td>cell</td>
+                            <td>Triglyceride</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>ADA</td>
                             <td>${s.ADA}</td>
-                            <td>cell</td>
+                            <td>U/L</td>
                         </tr>
                     </table>
                 </div>

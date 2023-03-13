@@ -51,37 +51,37 @@
                             <td>#</td>
                             <td>Digoxin</td>
                             <td>${s.digoxin}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Estradiol</td>
                             <td>${s.estradiol}</td>
-                            <td>cell</td>
+                            <td>pg/ml</td>
                         </tr>                                             
                         <tr>
                             <td>#</td>
                             <td>Ferritin</td>
                             <td>${s.ferritin}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>FolicAcid</td>
                             <td>${s.folicAcid}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Progesterone</td>
                             <td>${s.progesterone}</td>
-                            <td>cell</td>
+                            <td>ng/ml</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Prolactin</td>
                             <td>${s.prolactin}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                         <tr>
                             <td>#</td>
@@ -93,13 +93,13 @@
                             <td>#</td>
                             <td>Testosterone</td>
                             <td>${s.testosterone}</td>
-                            <td>cell</td>
+                            <td>ng/dl</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>TotalPSA</td>
                             <td>${s.totalPSA}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                     </table>
                 </div>
