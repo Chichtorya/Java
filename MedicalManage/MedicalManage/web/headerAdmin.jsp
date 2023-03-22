@@ -150,11 +150,11 @@
                                     <i class="bi bi-circle"></i><span>Feedback</span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="icons-bootstrap.html">
                                     <i class="bi bi-circle"></i><span>Làm gì thì làm vào dây</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                 </c:if>
@@ -196,11 +196,11 @@
                                     <i class="bi bi-circle"></i><span>List Schedule</span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="icons-bootstrap.html">
                                     <i class="bi bi-circle"></i><span>Làm gì thì làm vào dây</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                      </c:if>
