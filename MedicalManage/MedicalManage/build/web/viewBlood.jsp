@@ -10,7 +10,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+         <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
     </head>
     <style>
         table {
@@ -51,39 +53,40 @@
                             <td>#</td>
                             <td>Red_Blood_Cell</td>
                             <td>${s.red_Blood_Cell}</td>
-                            <td>cell</td>
+                            <td>%</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>White_Blood_Cell</td>
                             <td>${s.white_Blood_Cell}</td>
-                            <td>cell</td>
+                            <td>K/uL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Platelets</td>
                             <td>${s.platelets}</td>
-                            <td>cell</td>
+                            <td>mcL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Hemoglobin</td>
                             <td>${s.hemoglobin}</td>
-                            <td>cell</td>
+                            <td>g/dL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Hemattocrit</td>
                             <td>${s.hemattocrit}</td>
-                            <td>cell</td>
+                            <td>%</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Mean_Corpuscular_Volume</td>
                             <td>${s.mean_Corpuscular_Volume}</td>
-                            <td>cell</td>
+                            <td>μm3</td>
                         </tr>
                     </table>
+
                 </div>
                  <div style="padding-left: 120px">
                 Result :<br>

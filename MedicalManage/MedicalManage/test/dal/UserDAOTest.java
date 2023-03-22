@@ -1,32 +1,48 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
 package dal;
 
-import model.Role;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import model.User;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
- * @author dell
+ * @author PC
  */
 public class UserDAOTest {
-    UserDAO dao = new UserDAO();
+    
     public UserDAOTest() {
     }
 
     @Test
     public void testGetRoleById() {
-         Role j = dao.getRoleById(1);
-        String name = "Admin";
-        assertEquals(name,j.getName());
     }
 
-    
     @Test
     public void testGetMajorById() {
+    }
+
+    @Test
+    public void testGetMoneyByMonth() {
+    }
+
+    @Test
+    public void testGetTotalMoneyByMonth() {
+    }
+
+    @Test
+    public void testGetTotalByMonth() {
+    }
+
+    @Test
+    public void testGetTotalByMonthByMajor() {
+    }
+
+    @Test
+    public void testMain() {
     }
 
     @Test
@@ -75,6 +91,9 @@ public class UserDAOTest {
 
     @Test
     public void testCheckGmail() {
+        UserDAO dao = new UserDAO();
+        boolean a = dao.checkGmail("a@gmail.com");
+        assertEquals(true,a);
     }
 
     @Test
@@ -90,8 +109,11 @@ public class UserDAOTest {
     }
 
     @Test
+    public void testCreateUserByAdmin1() {
+    }
+
+    @Test
     public void testBlockUser() {
-        
     }
 
     @Test
@@ -100,14 +122,6 @@ public class UserDAOTest {
 
     @Test
     public void testGetListByPage() {
-    }
-
-    @Test
-    public void testChangeRole() {
-    }
-
-    @Test
-    public void testChangeRole1() {
     }
 
     @Test
@@ -127,15 +141,18 @@ public class UserDAOTest {
     }
 
     @Test
+    public void testEditUserByAdmin1() {
+    }
+
+    @Test
     public void testResetPass() {
     }
 
     @Test
     public void testCheckUser() {
-    }
-
-    @Test
-    public void testMain() {
-    }
-    
+        UserDAO dao = new UserDAO();
+        User u = dao.checkUser("a@gmail.com", "dat123");
+        String name = "Doctor Strange";
+        assertEquals(name, u.getName());
+    }   
 }

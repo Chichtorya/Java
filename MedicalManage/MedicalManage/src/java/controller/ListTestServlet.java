@@ -12,8 +12,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.TypeTest;
+import model.User;
 
 /**
  *
@@ -63,23 +65,30 @@ public class ListTestServlet extends HttpServlet {
         ScheduleDAO dao = new ScheduleDAO();
         String action = request.getParameter("action");
         ArrayList<TypeTest> list = dao.getAllTypeTest();
+
         if (action == null) {
             action = "";
         }
-        if (action.equals("")) {
-            request.setAttribute("ListTest", list);
-            request.getRequestDispatcher("UpdateTest.jsp").forward(request, response);
-        }
-        if (action.equals("update")) {
-            String id = request.getParameter("id");
-            try {
-                int id1 = Integer.parseInt(id);
-                TypeTest t = dao.getTypeTestById(id1);
-                request.setAttribute("t", t);
-                request.getRequestDispatcher("EditPriceTest.jsp").forward(request, response);
-            } catch (NumberFormatException e) {
-                response.sendRedirect("/home");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user.getRole().getId() == 1) {
+            if (action.equals("")) {
+                request.setAttribute("ListTest", list);
+                request.getRequestDispatcher("UpdateTest.jsp").forward(request, response);
             }
+            if (action.equals("update")) {
+                String id = request.getParameter("id");
+                try {
+                    int id1 = Integer.parseInt(id);
+                    TypeTest t = dao.getTypeTestById(id1);
+                    request.setAttribute("t", t);
+                    request.getRequestDispatcher("EditPriceTest.jsp").forward(request, response);
+                } catch (NumberFormatException e) {
+                    response.sendRedirect("/home");
+                }
+            }
+        } else {
+            response.sendRedirect("/home");
         }
     }
 
@@ -103,7 +112,7 @@ public class ListTestServlet extends HttpServlet {
                 int id1 = Integer.parseInt(id);
                 float price = Float.parseFloat(pri);
                 dao.updatePrice(id1, price);
-                  ArrayList<TypeTest> list = dao.getAllTypeTest();
+                ArrayList<TypeTest> list = dao.getAllTypeTest();
                 request.setAttribute("ListTest", list);
                 request.getRequestDispatcher("UpdateTest.jsp").forward(request, response);
             } catch (NumberFormatException e) {

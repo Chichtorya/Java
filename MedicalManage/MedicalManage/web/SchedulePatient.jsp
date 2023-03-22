@@ -10,7 +10,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
     </head>
     <body>
         <jsp:include page="header.jsp"></jsp:include>
@@ -22,7 +24,8 @@
                         <th scope="col">Description</th>
                         <th scope="col">Date</th>
                         <th scope="col">Room</th>
-                        <th scope="col">Action</th>
+                    <c:if test="${sessionScope.account.role.id == 3}">
+                        <th scope="col">Action</th></c:if>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +36,6 @@
                         <td>${x.datetime}</td>
                         <td>${x.major.room}</td>
                         <td>
-                            <a href="/account?action=view&id=${x.id}" class="btn btn-info">View</a>
                             <c:if test="${sessionScope.account.role.id == 3}">
                             <a href="/updateSchedule?id=${x.id}" class="btn btn-warning">Update</a>
                             </c:if>

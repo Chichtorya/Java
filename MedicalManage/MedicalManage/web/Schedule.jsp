@@ -8,7 +8,9 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Dashboard - NiceAdmin Bootstrap Template</title>
+       <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
 
 
         <!-- =======================================================
@@ -88,7 +90,7 @@
                                                 <a href="/viewSchedule?id=${x.id}" class="btn btn-info">View</a>
                                                 <c:if test="${sessionScope.account.role.id != 2}">
                                                 <a href="/updateSchedule?id=${x.id}" class="btn btn-warning">Update</a>
-                                                <a href="/deleteSchedule?id=${x.id}" class="btn btn-danger">Delete</a>
+                                                <a href="/deleteSchedule?id=${x.id}" class="btn btn-danger" onclick="return confirm('Are you sure to delete it ? ')" >Delete</a>
                                                 </c:if>
                                             </td>
                                         </tr>

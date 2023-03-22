@@ -10,7 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bootstrap Example</title>
+          <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -105,7 +107,10 @@
                                             <label for="email"><h4>Room</h4></label><br>
                                            <select style="width: 850px; padding: 5px 0px" name="major">
                                         <c:forEach items="${sessionScope.ListMajor}" var="x" >
-                                            <option value="${x.id}" ${major1 == x.id?"selected":""}>${x.room}</option>
+                                           
+                                            <c:if test="${x.id != 4}">
+                                                <option value="${x.id}" ${major1 == x.id?"selected":""}>${x.room}</option>
+                                            </c:if>
                                         </c:forEach>
                                     </select>
                                         </div>

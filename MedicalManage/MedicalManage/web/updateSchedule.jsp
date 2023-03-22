@@ -10,7 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bootstrap Example</title>
+         <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -27,10 +29,7 @@
                     <div class="col-sm-3"><!--left col-->
                         <div class="text-center">
                             <img src="images/${requestScope.u.img}" class="avatar img-circle img-thumbnail" alt="avatar">
-                        <!--                            <c:if test="${sessionScope.account.id == requestScope.u.id}">
-                                                        <h6>Upload a different photo...</h6>
-                                                        <input type="file" name="photo" value="${requestScope.u.img}" class="text-center center-block file-upload" >
-                        </c:if>     -->
+               
                     </div></hr><br>
                     <c:if test="${sessionScope.account.id == requestScope.u.id}">
                         <ul class="list-group">

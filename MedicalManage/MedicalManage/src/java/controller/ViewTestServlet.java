@@ -14,10 +14,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.BiochemistryTests;
 import model.BloodTests;
 import model.ImmunoassTest;
-import model.Schedule;
+import model.User;
 
 /**
  *
@@ -65,6 +66,9 @@ public class ViewTestServlet extends HttpServlet {
         TestDao tdao = new TestDao();
         String id = request.getParameter("id");
         String type = request.getParameter("type");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if(user!= null){
         try {
             int id_exam = Integer.parseInt(id);
             int id_type = Integer.parseInt(type);
@@ -87,7 +91,10 @@ public class ViewTestServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             response.sendRedirect("/login");
         }
-    } 
+    } else{
+            response.sendRedirect("/home");
+        }
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

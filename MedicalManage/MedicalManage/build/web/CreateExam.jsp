@@ -10,7 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bootstrap Example</title>
+          <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -21,7 +23,7 @@
             <hr>
             <div class="container bootstrap snippet">
                 <div class="row">
-                    <div class="col-sm-10"><h1>Create Schedule</h1></div>
+                    <div class="col-sm-10"><h1>Create Examination</h1></div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3"><!--left col-->

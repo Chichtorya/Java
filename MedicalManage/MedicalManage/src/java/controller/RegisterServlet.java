@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import model.Role;
 import model.Send;
 import model.User;
@@ -62,6 +64,9 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+          LocalDate curDate = java.time.LocalDate.now();
+          request.setAttribute("maxDate",curDate);
+          
         request.getRequestDispatcher("Register.jsp").forward(request, response);
     }
 

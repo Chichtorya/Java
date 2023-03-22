@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller;
 
 import dal.ScheduleDAO;
@@ -102,11 +97,11 @@ public class UpdateScheduleServlet extends HttpServlet {
             int major1 = Integer.parseInt(major);
             Major m = dao.getMajorById(major1);
             int id1 = Integer.parseInt(id);
-            User u = dao.getUserById(id1);
-            Schedule sche = new Schedule(m, u, descrip, date, 0);
+            Schedule s = dao1.getScheduleByID(id1);
+            Schedule sche = new Schedule(m, s.getUser(), descrip, date, 0);
             dao1.UpdateSchedule(sche,id1);
             String ms = "update schedule success . ";
-            request.setAttribute("u", u);
+            request.setAttribute("u", s.getUser());
             request.setAttribute("ms", ms);
             request.getRequestDispatcher("Profile.jsp").forward(request, response);
         } catch (NumberFormatException e) {
@@ -124,3 +119,4 @@ public class UpdateScheduleServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+

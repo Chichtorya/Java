@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Bill;
 import model.BillOrder;
@@ -66,6 +67,9 @@ public class PaymentServlet extends HttpServlet {
         ExamDAO edao = new ExamDAO();
         ScheduleDAO sdao = new ScheduleDAO();
        String id = request.getParameter("id");
+           HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user!= null) {
        try{
            int id1 = Integer.parseInt(id);
            Bill b =dao.getBillById(id1);
@@ -83,7 +87,10 @@ public class PaymentServlet extends HttpServlet {
        }catch(NumberFormatException e){
            response.sendRedirect("/home");
        }
-    } 
+    } else{
+            response.sendRedirect("/home");
+        }
+        }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

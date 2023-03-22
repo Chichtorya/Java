@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.User;
 
@@ -61,6 +62,9 @@ public class ListBlockServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          UserDAO dao = new UserDAO();
+             HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user.getRole().getId() == 1 ) {
         ArrayList<User> list = dao.getAllUserBlock(0);
         int page, numberpage = 8;
         int size = list.size();
@@ -79,7 +83,10 @@ public class ListBlockServlet extends HttpServlet {
         request.setAttribute("page", page);
         request.setAttribute("numberpage", num);
         request.getRequestDispatcher("ListAccountBlock.jsp").forward(request, response);
-    }
+    } else{
+            response.sendRedirect("/home");
+        }
+        }
 
     /**
      * Handles the HTTP <code>POST</code> method.

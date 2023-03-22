@@ -10,14 +10,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
     </head>
     <body>
        <jsp:include page="header.jsp"></jsp:include>
   <div class="changePas" >
       <h1 style="text-align: center">Change Password</h1>
        <form action="change" >
-           <p style="color :red">${requestScope.ms}</p>
+           <p style="color :red">${requestScope.ms1}</p>
            <p style="color :greenyellow">${sessionScope.ms1}</p>
             <p style="color :red" id="mess"></p>
            <table >

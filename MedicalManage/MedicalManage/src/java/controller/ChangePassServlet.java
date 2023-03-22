@@ -70,7 +70,7 @@ public class ChangePassServlet extends HttpServlet {
                         User a = dao.checkUser(acc, opass);
                         if (a == null) {
                             String ms = "Old password incorrect";
-                            request.setAttribute("ms", ms);
+                            request.setAttribute("ms1", ms);
                             request.getRequestDispatcher("changePass.jsp").forward(request, response);
                         } else {
                             dao.ChangePass(acc, npass);
@@ -83,12 +83,12 @@ public class ChangePassServlet extends HttpServlet {
                         }
                     } else {
                         String ms = "Re-password incorrect";
-                        request.setAttribute("ms", ms);
+                        request.setAttribute("ms1", ms);
                         request.getRequestDispatcher("changePass.jsp").forward(request, response);
                     }
                 } else {
                     String ms = "New password have more than 5 characters .";
-                    request.setAttribute("ms", ms);
+                    request.setAttribute("ms1", ms);
                     request.getRequestDispatcher("changePass.jsp").forward(request, response);
                 }
             

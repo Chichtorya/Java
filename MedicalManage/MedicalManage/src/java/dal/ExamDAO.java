@@ -17,35 +17,6 @@ import model.Exam;
  */
 public class ExamDAO extends DbContext {
 
-//    public Exam getExamByTime(int id_doctor, int id_user) {
-//         UserDAO dao = new UserDAO();
-//        String sql = "select * from Examination \n"
-//                + "where Doctor_In_Charge = ? and id_user = ?\n"
-//                + "order by Visit_Time desc limit 1";
-//        try {
-//            PreparedStatement ps = connection.prepareStatement(sql);
-//            ps.setInt(1, id_doctor);
-//            ps.setInt(2, id_user);
-//            ResultSet rs = ps.executeQuery();
-//             while (rs.next()) {
-//            return new Exam(rs.getInt("id"),
-//                    dao.getUserById(rs.getInt("Doctor_In_Charge")),
-//                    dao.getUserById(rs.getInt("id_user")),
-//                    rs.getInt("id_bio"),
-//                    rs.getInt("id_blood"),
-//                    rs.getInt("id_immu"),
-//                    rs.getString("Visit_Time"),
-//                    rs.getString("Disease_Description"),
-//                    rs.getString("Diagnose"),
-//                    rs.getString("Conclusion"),
-//                    rs.getFloat("Total_Test_Price"),
-//                    rs.getInt("status"));
-//             }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return null;
-//    }
     public void updateExam(int id_bio, int id_blo, int id_immu, int id) {
         String sql = "update Examination set id_bio = ? , id_blood = ? , id_immu = ? where id = ?";
         try {
@@ -58,6 +29,21 @@ public class ExamDAO extends DbContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+     public void UpdateExamToComplete(Exam exam,int id) {
+        String sql = "update examination set Disease_Description = ?"
+                + " ,Diagnose = ? ,Conclusion = ?, status = 1 where id = ? ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(4,id);
+            st.setString(1, exam.getDescription());
+            st.setString(2, exam.getDiagnose());
+            st.setString(3, exam.getConclusion());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
     }
 
     public Exam getExamById(int id) {
@@ -157,6 +143,33 @@ public class ExamDAO extends DbContext {
         UserDAO dao = new UserDAO();
         ArrayList<Exam> list = new ArrayList<>();
         String sql = "select * from Examination ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Exam(rs.getInt("id"),
+                        dao.getUserById(rs.getInt("Doctor_In_Charge")),
+                        dao.getUserById(rs.getInt("id_user")),
+                        rs.getInt("id_bio"),
+                        rs.getInt("id_blood"),
+                        rs.getInt("id_immu"),
+                        rs.getString("Visit_Time"),
+                        rs.getString("Disease_Description"),
+                        rs.getString("Diagnose"),
+                        rs.getString("Conclusion"),
+                        rs.getFloat("Total_Test_Price"),
+                        rs.getInt("status")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public ArrayList<Exam> getAllExamByDoctorAndStatus() {
+        UserDAO dao = new UserDAO();
+        ArrayList<Exam> list = new ArrayList<>();
+        String sql = "select * from Examination where id_doctor = ? and status = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

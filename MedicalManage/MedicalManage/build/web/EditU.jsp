@@ -10,7 +10,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+         <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
     </head>
     <body>
         <jsp:include page="headerAdmin.jsp"></jsp:include>
@@ -52,7 +54,7 @@
                                     </li>    
                                     <c:if test="${sessionScope.account.role.id ==1}">
                                         <li class="nav-item ">
-                                            <a href="/account?action=editRole&id=${requestScope.u.id}" class="nav-link active" >Edit Role</a>
+                                            <a href="/account?action=editRole&id=${requestScope.u.id}" class="nav-link active" >Edit information</a>
                                         </li>
                                     </c:if>
                                 </ul>

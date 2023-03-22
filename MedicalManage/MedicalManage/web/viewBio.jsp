@@ -10,7 +10,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+         <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
     </head>
     <style>
         table {
@@ -150,6 +152,7 @@
                             <td>U/L</td>
                         </tr>
                     </table>
+
                 </div>
                  <div style="padding-left: 120px">
                 Result :<br>

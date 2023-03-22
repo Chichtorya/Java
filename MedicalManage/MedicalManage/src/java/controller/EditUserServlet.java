@@ -15,9 +15,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import model.User;
 
 /**
@@ -69,6 +66,9 @@ public class EditUserServlet extends HttpServlet {
         UserDAO dao = new UserDAO();
         String action = request.getParameter("action");
         String id = request.getParameter("id");
+                    HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user!=null) {
         if (action.equals("editUser")) {
             try {
                 int id1 = Integer.parseInt(id);
@@ -78,6 +78,9 @@ public class EditUserServlet extends HttpServlet {
             } catch (NumberFormatException e) {
                 response.sendRedirect("/home");
             }
+        }
+    }else{
+            response.sendRedirect("/home");
         }
     }
 

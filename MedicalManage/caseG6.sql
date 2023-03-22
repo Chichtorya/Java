@@ -70,11 +70,14 @@ CREATE TABLE Examination (
   status int
 );
 -- id_bio , id_blood , id_immu =0 la ko co , 1 la co
-create table Stock (
-id int not null PRIMARY KEY auto_increment,
-description nvarchar(500),
-id_exam int ,
-foreign key (id_exam) references Examination(id)
+CREATE TABLE Prescription_Detail (
+  id int NOT NULL AUTO_INCREMENT,
+  Exam_id int NOT NULL,
+  Drug_Name varchar(255) NOT NULL,
+  Dosage varchar(255) NOT NULL,
+  note varchar(255) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (Exam_id) REFERENCES Examination(id)
 );
 -- CREATE TABLE Test (
 --   id int not null PRIMARY KEY auto_increment,

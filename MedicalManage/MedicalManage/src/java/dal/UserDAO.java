@@ -54,9 +54,11 @@ public class UserDAO extends DbContext {
     }
 
     public float getMoneyByMonth(int begin, int last, int month, int id_major) {
-        String sql = "select sum(e.Total_Test_Price) as 'money' from Examination e\n"
+        String sql = "select sum(b.totalPrice) as 'money' from Bill b\n"
+                + "inner join Examination e on b.id_exam = e.id \n"
                 + "inner join Schedule s on s.id_exam = e.id\n"
-                + "where DAY(Visit_Time) >= ? and DAY(Visit_Time) <= ? and MONTH(Visit_Time) = ? and s.id_majors = ?";
+                + "where DAY(Visit_Time) >= ? and DAY(Visit_Time) <= ? and\n"
+                + " MONTH(Visit_Time) = ? and s.id_majors = ?  and b.status = 1;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, begin);
@@ -72,10 +74,13 @@ public class UserDAO extends DbContext {
         }
         return 0;
     }
+
     public float getTotalMoneyByMonth(int begin, int last, int month, int id_major) {
-        String sql = "select sum(e.Total_Test_Price) as 'money' from Examination e\n"
+        String sql = "select sum(b.totalPrice) as 'money' from Bill b\n"
+                + "inner join Examination e on b.id_exam = e.id \n"
                 + "inner join Schedule s on s.id_exam = e.id\n"
-                + "where DAY(Visit_Time) >= ? and DAY(Visit_Time) <= ? and MONTH(Visit_Time) = ? and s.id_majors != ?";
+                + "where DAY(Visit_Time) >= ? and DAY(Visit_Time) <= ? and\n"
+                + " MONTH(Visit_Time) = ? and s.id_majors != ?  and b.status = 1;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, begin);
@@ -93,9 +98,11 @@ public class UserDAO extends DbContext {
     }
 
     public float getTotalByMonth(int month) {
-        String sql = "select sum(e.Total_Test_Price) as 'money' from Examination e\n"
+        String sql = "select sum(b.totalPrice) as 'money' from Bill b\n"
+                + "inner join Examination e on b.id_exam = e.id \n"
                 + "inner join Schedule s on s.id_exam = e.id\n"
-                + "where  MONTH(Visit_Time) = ? and s.id_majors !=4 ";
+                + "where "
+                + " MONTH(Visit_Time) = ? and s.id_majors != 4  and b.status = 1;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, month);
@@ -108,7 +115,8 @@ public class UserDAO extends DbContext {
         }
         return 0;
     }
-    public float getTotalByMonthByMajor(int month,int majors) {
+
+    public float getTotalByMonthByMajor(int month, int majors) {
         String sql = "select sum(e.Total_Test_Price) as 'money' from Examination e\n"
                 + "inner join Schedule s on s.id_exam = e.id\n"
                 + "where  MONTH(Visit_Time) = ? and s.id_majors =? ";
@@ -239,7 +247,7 @@ public class UserDAO extends DbContext {
                         role,
                         major,
                         rs.getInt("isBlock"),
-                          rs.getFloat("salary"),
+                        rs.getFloat("salary"),
                         rs.getString("Gmail"),
                         rs.getString("Password")
                 ));
@@ -274,7 +282,7 @@ public class UserDAO extends DbContext {
                         role,
                         major,
                         rs.getInt("isBlock"),
-                          rs.getFloat("salary"),
+                        rs.getFloat("salary"),
                         rs.getString("Gmail"),
                         rs.getString("Password")
                 ));
@@ -311,7 +319,7 @@ public class UserDAO extends DbContext {
                         role,
                         major,
                         rs.getInt("isBlock"),
-                          rs.getFloat("salary"),
+                        rs.getFloat("salary"),
                         rs.getString("Gmail"),
                         rs.getString("Password")
                 ));
@@ -361,7 +369,7 @@ public class UserDAO extends DbContext {
                         role,
                         major,
                         rs.getInt("isBlock"),
-                          rs.getFloat("salary"),
+                        rs.getFloat("salary"),
                         rs.getString("Gmail"),
                         rs.getString("Password")
                 ));
@@ -472,6 +480,29 @@ public class UserDAO extends DbContext {
             System.out.println(e);
         }
     }
+    public void createUserByAdmin2(User pro) {
+        String sql = "INSERT INTO Users (name, img, phone, Date_Of_Birth, Gender, Citizen_Id, Health_Id, Address, id_role, isBlock,salary, gmail, password) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            String pass = MD5(pro.getPassword());
+            ps.setString(1, pro.getName());
+            ps.setString(2, pro.getImg());
+            ps.setString(3, pro.getPhone());
+            ps.setString(4, pro.getDate_Of_Birth());
+            ps.setInt(5, pro.getGender());
+            ps.setString(6, pro.getCitizen_Id());
+            ps.setString(7, pro.getHealth_Id());
+            ps.setString(8, pro.getAddress());
+            ps.setInt(9, pro.getRole().getId());
+            ps.setInt(10, 1);
+            ps.setFloat(11, pro.getSalary());
+            ps.setString(12, pro.getGmail());
+            ps.setString(13, pass);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     public void BlockUser(int isBlock, int id) {
         try {
@@ -532,7 +563,7 @@ public class UserDAO extends DbContext {
                         role,
                         major,
                         rs.getInt("isBlock"),
-                          rs.getFloat("salary"),
+                        rs.getFloat("salary"),
                         rs.getString("Gmail"),
                         rs.getString("Password")
                 ));
@@ -567,7 +598,7 @@ public class UserDAO extends DbContext {
                         role,
                         major,
                         rs.getInt("isBlock"),
-                          rs.getFloat("salary"),
+                        rs.getFloat("salary"),
                         rs.getString("Gmail"),
                         rs.getString("Password")
                 ));
@@ -622,6 +653,28 @@ public class UserDAO extends DbContext {
             System.out.println(e);
         }
     }
+    public void editUserByAdmin2(User pro, int id) {
+        String spl = "UPDATE users SET name = ?,Gender = ?, "
+                + "Date_Of_Birth = ?, Citizen_Id = ?,"
+                + "Health_Id = ?, Address = ?,id_role = ?,id_majors = null,salary=?,phone = ?, Gmail = ? WHERE Id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(spl);
+            ps.setInt(11, id);
+            ps.setString(1, pro.getName());
+            ps.setInt(2, pro.getGender());
+            ps.setString(3, pro.getDate_Of_Birth());
+            ps.setString(4, pro.getCitizen_Id());
+            ps.setString(5, pro.getHealth_Id());
+            ps.setString(6, pro.getAddress());
+            ps.setInt(7, pro.getRole().getId());
+            ps.setFloat(8, pro.getSalary());
+            ps.setString(9, pro.getPhone());
+            ps.setString(10, pro.getGmail());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     public void editUserByAdmin1(User pro, int id) {
         String spl = "UPDATE users SET name = ?,Gender = ?, "
@@ -660,7 +713,6 @@ public class UserDAO extends DbContext {
 
     public User checkUser(String gmail, String pass) {
         String sql = "select * from Users where gmail =? and password=?";
-
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             String pass1 = MD5(pass);

@@ -66,7 +66,9 @@ public class ListScheduleServlet extends HttpServlet {
         ScheduleDAO dao = new ScheduleDAO();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
-        if(user != null){
+         if(user == null || user.getRole().getId() == 4 ){
+            response.sendRedirect("/home");
+        }else
         if (user.getRole().getId() == 2) {
             ArrayList<Schedule> list = dao.getAllScheduleByMajor(user.getMajor().getId(), 0);
             request.setAttribute("ListSchedule", list);
@@ -76,10 +78,8 @@ public class ListScheduleServlet extends HttpServlet {
             request.setAttribute("ListSchedule", list);
             request.getRequestDispatcher("Schedule.jsp").forward(request, response);
         }
-        }else{
-            response.sendRedirect("/login");
         }
-    }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.

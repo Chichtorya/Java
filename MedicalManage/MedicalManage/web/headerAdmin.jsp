@@ -158,6 +158,7 @@
                         </ul>
                     </li>
                 </c:if>
+
                 <c:if test="${sessionScope.account.role.id == 3 || sessionScope.account.role.id == 2}">
                     <li class="nav-item">
                         <a class="nav-link " href="/home">
@@ -182,12 +183,14 @@
                                 </a>
                             </li>             
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                    </li>                
+                </c:if>
+                     <c:if test="${sessionScope.account.role.id != 4 }">
+                     <li class="nav-item">
+                        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
                             <i class="bi bi-gem"></i><span>Schedule</span><i class="bi bi-chevron-down ms-auto"></i>
                         </a>
-                        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
                                 <a href="/listSchedule">
                                     <i class="bi bi-circle"></i><span>List Schedule</span>
@@ -200,7 +203,27 @@
                             </li>
                         </ul>
                     </li>
+                     </c:if>
+                <c:if test="${sessionScope.account.role.id == 1 || sessionScope.account.role.id == 3}">
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                            <i class="bi bi-journal-text"></i><span>Bill Management</span><i class="bi bi-chevron-down ms-auto"></i>
+                        </a>
+                        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                            <li>
+                                <a href="/listBillPaid">
+                                    <i class="bi bi-circle"></i><span>List bill paid</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/listBillUnPaid">
+                                    <i class="bi bi-circle"></i><span>List bill unpaid</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li><!-- End Forms Nav -->
                 </c:if>
+
                 <li class="nav-heading">Pages</li>
 
                 <li class="nav-item">

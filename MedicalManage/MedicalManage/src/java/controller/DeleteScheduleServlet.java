@@ -13,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -58,6 +60,9 @@ public class DeleteScheduleServlet extends HttpServlet {
     throws ServletException, IOException {
        ScheduleDAO dao = new ScheduleDAO();
        String id = request.getParameter("id");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user.getRole().getId() == 3) {
        try{
            int id1 = Integer.parseInt(id);
            dao.deleteSchedule(id1);
@@ -65,7 +70,10 @@ public class DeleteScheduleServlet extends HttpServlet {
        }catch(NumberFormatException e){
            response.sendRedirect("/login");
        }
-    } 
+    } else{
+            response.sendRedirect("/home");
+        }
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

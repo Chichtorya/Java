@@ -1,5 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package controller;
-
 
 import dal.PrescriptionDao;
 import java.io.IOException;
@@ -9,13 +12,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Prescription;
+import model.User;
 
 /**
  *
- * @author chich
+ * @author PC
  */
-@WebServlet(name = "PrescriptionServlet", urlPatterns = {"/Prescription"})
+@WebServlet(name = "PrescriptionServlet", urlPatterns = {"/prescription"})
 public class PrescriptionServlet extends HttpServlet {
 
     /**
@@ -56,7 +61,20 @@ public class PrescriptionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user.getRole().getId() == 2) {
+        String id = request.getParameter("id_exam");
+        try {
+            int id1 = Integer.parseInt(id);
+            request.setAttribute("ide", id);
+            request.getRequestDispatcher("AddPrescription.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            response.sendRedirect("/home");
+        }
+    }else{
+            response.sendRedirect("/home");
+        }
     }
 
     /**
@@ -80,8 +98,8 @@ public class PrescriptionServlet extends HttpServlet {
         String[] additionalDrugDosages = request.getParameterValues("additionalDrugDosage");
         String[] additionalDrugNotes = request.getParameterValues("additionalDrugNote");
         Prescription prescription = new Prescription(examId, drugName, dosage, note);
-        String error ; 
-               error= prescriptionDao.addPrescription(prescription);
+        String error;
+        error = prescriptionDao.addPrescription(prescription);
         if (additionalDrugNames != null) {
             for (int i = 0; i < additionalDrugNames.length; i++) {
                 String ValueNotes = i < additionalDrugNotes.length ? additionalDrugNotes[i] : "not have";
@@ -89,14 +107,13 @@ public class PrescriptionServlet extends HttpServlet {
                 error = prescriptionDao.addPrescription(obj);
             }
         }
-        // if (error == null) {
-        //          request.setAttribute("mess", "no bi null");
-        // }
-        // request.setAttribute("mess", error);
-        //   request.getRequestDispatcher("newjsp.jsp").forward(request, response);
+      response.sendRedirect("/recordDetail?id="+examId);
+
+
     }
 
     /**
+     * F
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
@@ -107,4 +124,3 @@ public class PrescriptionServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-

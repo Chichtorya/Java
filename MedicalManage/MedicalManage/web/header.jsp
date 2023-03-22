@@ -64,7 +64,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/schedulePatient?id=${sessionScope.account.id}">Schedule</a>
                             </li>
-                            <c:if test="${sessionScope.account.role.id != 4 && sessionScope.account.role.id != 1 }">
+                            <c:if test="${sessionScope.account.role.id == 2 || sessionScope.account.role.id == 3 }">
                             <li class="nav-item">
                                 <a class="nav-link" href="/listPatient">List Patient</a>
                             </li>   

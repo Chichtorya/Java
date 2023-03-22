@@ -39,6 +39,13 @@ public class Exam {
         this.totalPrice = totalPrice;
         this.status = status;
     }
+    public Exam(int id, String description, String diagnose, String conclusion, int status) {
+        this.id = id;
+        this.description = description;
+        this.diagnose = diagnose;
+        this.conclusion = conclusion;
+        this.status = status;
+    }
     public Exam( User id_doctor, User id_patient, int id_bio, int id_blood, int id_immu, String time, String description, String diagnose, String conclusion, float totalPrice, int status) {
         this.id_doctor = id_doctor;
         this.id_patient = id_patient;

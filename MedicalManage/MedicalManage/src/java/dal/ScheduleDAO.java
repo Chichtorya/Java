@@ -40,7 +40,7 @@ public class ScheduleDAO extends DbContext {
         }
         return list;
     }
-    public void UpdateSchedule(Schedule s, int id) {
+     public void UpdateSchedule(Schedule s, int id) {
         String sql = "update Schedule set id_majors = ?, id_user = ?,descrip = ? , day= ? where id = ? ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -54,6 +54,7 @@ public class ScheduleDAO extends DbContext {
             System.out.println(e);
         }
     }
+
 
     public void updatePrice(int id, float price) {
         String sql = "update Type set price = ? where id = ?";

@@ -65,6 +65,9 @@ public class FeedBackServlet extends HttpServlet {
             throws ServletException, IOException {
         FeedBackDAO dao = new FeedBackDAO();
         String action = request.getParameter("action");
+                        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user.getRole().getId() == 1) {
         if (action == null) {
             action = "";
         }
@@ -103,6 +106,9 @@ public class FeedBackServlet extends HttpServlet {
                 break;
         }
 
+    }else{
+            response.sendRedirect("/home");
+        }
     }
 
     /**

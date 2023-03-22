@@ -9,7 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+         <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
     </head>
     <body>
         <jsp:include page="headerAdmin.jsp"></jsp:include>
@@ -87,7 +89,7 @@
                                                 <c:if test="${requestScope.s.status == 0}"><a href="/createTest?id=${requestScope.s.id}" >
                                                         Create Test   </a>
                                                     </c:if>
-                                                <c:if test="${requestScope.s.status == 2}"><a href="viewTest?id=${requestScope.s.exam.id}&type=${requestScope.s.type.id}">
+                                                    <c:if test="${requestScope.s.status == 2}"><a href="viewTest?id=${requestScope.s.exam.id}&type=${requestScope.s.type.id}">
                                                         View Result </a>
                                                     </c:if>
                                                 </c:if>
@@ -96,15 +98,16 @@
                                                 <c:if test="${requestScope.s.status == 0}"><a href="/createExam?id=${requestScope.s.id}" >
                                                         Create Examination   </a>
                                                     </c:if>
-                                                    <c:if test="${requestScope.s.status == 1}"><a href="/viewEx" >
+                                                    <c:if test="${requestScope.s.status == 1}"><a href="/updateExam?id=${requestScope.s.id}" >
                                                         Update Examination  </a>
                                                     </c:if>  
                                                 </c:if>  </td>
                                         <td>
-                                                <c:if test="${requestScope.s.status == 2}"><a href="/recordDetail?id=${requestScope.s.exam.id}" >
+                                            <c:if test="${requestScope.s.status == 2}">
+                                                <a  href="/recordDetail?id=${requestScope.s.exam.id}">
                                                     View Examination   </a>
                                                 </c:if>  
-
+                                            
                                         </td>
 
                                     </tr>

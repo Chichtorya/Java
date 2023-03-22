@@ -18,7 +18,9 @@
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script
         src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <title>JSP Page</title>
+         <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
     </head>
     <body>
         <div class="container" style="margin-top: 10px;">
@@ -41,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <label>Date Of Birth </label> 
-                            <input type="date" min="1900-01-01" max="2023-02-07" required  class="form-control" name="date" value="${requestScope.date}" placeholder="Enter birth day">
+                            <input type="date" min="1900-01-01" max="${maxDate}" required  class="form-control" name="date" value="${requestScope.date}" placeholder="Enter birth day">
                             <p style="color: red">${requestScope.msDate}</p>
                         </div>              
 

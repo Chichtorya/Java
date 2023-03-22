@@ -4,10 +4,8 @@
  */
 package controller;
 
-import dal.ExamDAO;
 import dal.ScheduleDAO;
 import dal.TestDao;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -69,23 +67,29 @@ public class CreateTestServlet extends HttpServlet {
             throws ServletException, IOException {
         ScheduleDAO dao = new ScheduleDAO();
         String id_sche = request.getParameter("id");
-        try {
-            int id_schedule = Integer.parseInt(id_sche);
-            Schedule s = dao.getScheduleByID(id_schedule);
-            if (s.getType().getId() == 1) {
-                request.setAttribute("s", s);
-                request.getRequestDispatcher("addBioTest.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user.getRole().getId() == 2) {
+            try {
+                int id_schedule = Integer.parseInt(id_sche);
+                Schedule s = dao.getScheduleByID(id_schedule);
+                if (s.getType().getId() == 1) {
+                    request.setAttribute("s", s);
+                    request.getRequestDispatcher("addBioTest.jsp").forward(request, response);
+                }
+                if (s.getType().getId() == 2) {
+                    request.setAttribute("s", s);
+                    request.getRequestDispatcher("addBloodTest.jsp").forward(request, response);
+                }
+                if (s.getType().getId() == 3) {
+                    request.setAttribute("s", s);
+                    request.getRequestDispatcher("addImmTest.jsp").forward(request, response);
+                }
+            } catch (NumberFormatException e) {
+                response.sendRedirect("/login");
             }
-            if (s.getType().getId() == 2) {
-                request.setAttribute("s", s);
-                request.getRequestDispatcher("addBloodTest.jsp").forward(request, response);
-            }
-            if (s.getType().getId() == 3) {
-                request.setAttribute("s", s);
-                request.getRequestDispatcher("addImmTest.jsp").forward(request, response);
-            }
-        } catch (NumberFormatException e) {
-            response.sendRedirect("/login");
+        } else {
+            response.sendRedirect("/home");
         }
     }
 
@@ -105,7 +109,6 @@ public class CreateTestServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("account");
         String action = request.getParameter("action");
-        RequestDispatcher dispatcher;
         if (action == null) {
             action = "";
         }
@@ -132,11 +135,14 @@ public class CreateTestServlet extends HttpServlet {
                         float Triglyceride = Float.parseFloat((String) request.getParameter("Triglyceride"));
                         float ADA = Float.parseFloat((String) request.getParameter("ADA"));
                         String result = request.getParameter("result");
-                        BiochemistryTests bio = new BiochemistryTests(u, sche.getExam(), Fasting, PP, Urea, TProtein,
-                                Sodium, Potassium, Choloride, TCalcium, TCalcium, UricAcid, TBilirubin, Albumin,
+                        
+                     
+                        BiochemistryTests bio = new BiochemistryTests(u, sche.getExam(), Fasting, PP, Urea, S_Cr,
+                                Sodium, Potassium, Choloride, TCalcium, Scardium, UricAcid, TBilirubin, AP,
                                 TProtein, Albumin, TCholesterol, Triglyceride, ADA, result);
                         tdao.createBioTest(bio);
                         dao.UpdateStatus(2, sche.getId());
+                        response.sendRedirect("viewTest?id=" + sche.getExam().getId() + "&type=1");
                     } else {
                         response.sendRedirect("/home");
                     }
@@ -159,6 +165,8 @@ public class CreateTestServlet extends HttpServlet {
                                 Platelets, Hemoglobin, Hemattocrit, MCV, result);
                         tdao.createBloodTest(blo);
                         dao.UpdateStatus(2, sche.getId());
+                        response.sendRedirect("viewTest?id=" + sche.getExam().getId() + "&type=2");
+
                     } else {
                         response.sendRedirect("/home");
                     }
@@ -185,6 +193,8 @@ public class CreateTestServlet extends HttpServlet {
                                 Testosterone, PSA, result);
                         tdao.addImmunoassTestdata(immu);
                         dao.UpdateStatus(2, sche.getId());
+                        response.sendRedirect("viewTest?id=" + sche.getExam().getId() + "&type=3");
+
                     } else {
                         response.sendRedirect("/home");
                     }

@@ -73,6 +73,10 @@ public class CreateExamServlet extends HttpServlet {
         ScheduleDAO dao = new ScheduleDAO();
         UserDAO udao = new UserDAO();
         String id = request.getParameter("id");
+                HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user.getRole().getId() == 2) {
+
         try {
             int id1 = Integer.parseInt(id);
             Schedule s = dao.getScheduleByID(id1);
@@ -86,7 +90,9 @@ public class CreateExamServlet extends HttpServlet {
             response.sendRedirect("/login");
             System.out.println(e);
         }
-
+        }else{
+            response.sendRedirect("/home");
+        }
     }
 
     /**
@@ -114,64 +120,70 @@ public class CreateExamServlet extends HttpServlet {
         String conclusion = request.getParameter("conclusion");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
-        if (test == null) {
-            try {
-                int ids = Integer.parseInt(id);
-                Schedule sche = dao.getScheduleByID(ids);
-                int bio1 = 0, blood1 = 0, immu1 = 0;
-                Exam e = new Exam(user, sche.getUser(), bio1, blood1, immu1, date, des, diagnose, conclusion, 1);
-                int ide = edao.createExam(e);
-                Exam e1 = edao.getExamById(ide);
-                dao.UpdateStatus(2, ids);
-                Bill b = new Bill(sche.getUser(), e1, 0);
-                int b0 = bdao.createBill(b);
-                Bill b1 = bdao.getBillById(b0);
-                BillOrder bo = new BillOrder(b1, sdao.getTypeTestById(4), sdao.getTypeTestById(4).getPrice());
-                bdao.createBillOrder(bo);
-                bdao.updateTotalPrice(bdao.getTotalPriceByBill(b0), b0);
-                response.sendRedirect("/recordDetail?id=" + ide);
-            } catch (NumberFormatException e) {
-                response.sendRedirect("/home");
-            }
-        } else {
-            try {
-                int ids = Integer.parseInt(id);
-                Schedule sche = dao.getScheduleByID(ids);
-                int bio1 = 0, blood1 = 0, immu1 = 0;
-                Exam e = new Exam(user, sche.getUser(), bio1, blood1, immu1, date, des, diagnose, conclusion, 0);
-                int ide = edao.createExam(e);
-                dao.UpdateStatus(3, ids);
-                Exam e1 = edao.getExamById(ide);
-                for (String i : test) {
-                    int x = Integer.parseInt(i);
-                    if (x == 1) {
-                        bio1 = 1;
-                    }
-                    if (x == 2) {
-                        blood1 = 1;
-                    }
-                    if (x == 3) {
-                        immu1 = 1;
-                    }
-                    Schedule s = new Schedule(udao.getMajorById(4), sche.getUser(), des, date, e1, sdao.getTypeTestById(x), 3);
-                    dao.addScheduleByExam(s);
-                }
-                Bill b = new Bill(sche.getUser(), e1, 0);
-                int b0 = bdao.createBill(b);
-                Bill b1 = bdao.getBillById(b0);
-                for (String i : test) {
-                    int x = Integer.parseInt(i);
-                    BillOrder bo = new BillOrder(b1, sdao.getTypeTestById(x), sdao.getTypeTestById(x).getPrice());
+
+            if (test == null) {
+                try {
+                    int ids = Integer.parseInt(id);
+                    Schedule sche = dao.getScheduleByID(ids);
+                    int bio1 = 0, blood1 = 0, immu1 = 0;
+                    Exam e = new Exam(user, sche.getUser(), bio1, blood1, immu1, date, des, diagnose, conclusion, 1);
+                    int ide = edao.createExam(e);
+                    Exam e1 = edao.getExamById(ide);
+                    dao.UpdateStatus(2, ids);
+                     dao.UpdateExamID(ide, ids);
+                    Bill b = new Bill(sche.getUser(), e1, 0);
+                    int b0 = bdao.createBill(b);
+                    Bill b1 = bdao.getBillById(b0);
+                    BillOrder bo = new BillOrder(b1, sdao.getTypeTestById(4), sdao.getTypeTestById(4).getPrice());
                     bdao.createBillOrder(bo);
+                    bdao.updateTotalPrice(bdao.getTotalPriceByBill(b0), b0);
+                    response.sendRedirect("/recordDetail?id=" + ide);
+                } catch (NumberFormatException e) {
+                    response.sendRedirect("/home");
                 }
-                 BillOrder bo = new BillOrder(b1, sdao.getTypeTestById(4), sdao.getTypeTestById(4).getPrice());
-                 bdao.createBillOrder(bo);
-                bdao.updateTotalPrice(bdao.getTotalPriceByBill(b0), b0);
-                response.sendRedirect("/viewSchedule?id=" + ids);
-            } catch (NumberFormatException e) {
-                response.sendRedirect("/login");
+            } else {
+                try {
+                    int ids = Integer.parseInt(id);
+                    Schedule sche = dao.getScheduleByID(ids);
+                    int bio1 = 0, blood1 = 0, immu1 = 0;
+                    Exam e = new Exam(user, sche.getUser(), bio1, blood1, immu1, date, des, diagnose, conclusion, 0);
+                    int ide = edao.createExam(e);
+                    dao.UpdateStatus(3, ids);
+                    Exam e1 = edao.getExamById(ide);
+                    for (String i : test) {
+                        int x = Integer.parseInt(i);
+                        if (x == 1) {
+                            bio1 = 1;
+                        }
+                        if (x == 2) {
+                            blood1 = 1;
+                        }
+                        if (x == 3) {
+                            immu1 = 1;
+                        }
+                        Schedule s = new Schedule(udao.getMajorById(4), sche.getUser(), des, date, e1, sdao.getTypeTestById(x), 3);
+                        dao.addScheduleByExam(s);
+                    }
+                    dao.UpdateExamID(ide, ids);
+                    edao.updateExam(bio1, blood1, immu1, ide);
+                    Bill b = new Bill(sche.getUser(), e1, 0);
+                    int b0 = bdao.createBill(b);
+                    Bill b1 = bdao.getBillById(b0);
+                    for (String i : test) {
+                        int x = Integer.parseInt(i);
+                        BillOrder bo = new BillOrder(b1, sdao.getTypeTestById(x), sdao.getTypeTestById(x).getPrice());
+                        bdao.createBillOrder(bo);
+                    }
+                    BillOrder bo = new BillOrder(b1, sdao.getTypeTestById(4), sdao.getTypeTestById(4).getPrice());
+                    bdao.createBillOrder(bo);
+                    bdao.updateTotalPrice(bdao.getTotalPriceByBill(b0), b0);
+                    response.sendRedirect("/viewSchedule?id=" + ids);
+                } catch (NumberFormatException e) {
+                    response.sendRedirect("/login");
+                }
             }
-            }
+       
+        
 
 //            int bio1 = Integer.parseInt(bio);
 //            int blood1 = Integer.parseInt(blood);
@@ -206,6 +218,7 @@ public class CreateExamServlet extends HttpServlet {
          */
         @Override
         public String getServletInfo
+        
         
             () {
         return "Short description";

@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Major;
 import model.Role;
 import model.User;
@@ -63,6 +64,8 @@ public class AccountMServlet extends HttpServlet {
             throws ServletException, IOException {
         UserDAO dao = new UserDAO();
         String action = request.getParameter("action");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
         if (action.equals("view")) {
             String id = request.getParameter("id");
             try {
@@ -74,77 +77,89 @@ public class AccountMServlet extends HttpServlet {
                 response.sendRedirect("/login");
             }
         }
-        if (action.equals("editRole")) {
-            String id = request.getParameter("id");
-            try {
-                int id1 = Integer.parseInt(id);
-                User u = dao.getUserById(id1);
-                request.setAttribute("u", u);
-                request.getRequestDispatcher("EditU.jsp").forward(request, response);
-            } catch (Exception e) {
-                response.sendRedirect("/login");
-            }
-        }
-    }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        UserDAO dao = new UserDAO();
-        String action = request.getParameter("action");
         if (action.equals("editRole")) {
-            String name = request.getParameter("name");
-            String phone = request.getParameter("phone");
-            String date = request.getParameter("date");
-            String gender = request.getParameter("gender");
-            String citizen = request.getParameter("cID");
-            String health = request.getParameter("hID");
-            String address = request.getParameter("address");
-            String gmail = request.getParameter("gmail");
-            String id = request.getParameter("id");
-            String role = request.getParameter("role");
-            String major = request.getParameter("major");
-            String salary = request.getParameter("salary");
-            try {
-                float sala = Float.parseFloat(salary);
-                int gender1 = Integer.parseInt(gender);
-                int id1 = Integer.parseInt(id);
-                int role1 = Integer.parseInt(role);
-                int major1 = Integer.parseInt(major);
-                Major j = dao.getMajorById(major1);
-                Role r = dao.getRoleById(role1);
-                User u = new User(name, phone, date, gender1, citizen, health, address, r, j,sala, gmail);
-                if (r.getId() == 2) {
-                    dao.editUserByAdmin(u, id1);
-                    response.sendRedirect("/account?action=view&id=" + id1);
-                } else {
-                    dao.editUserByAdmin1(u, id1);
-                    response.sendRedirect("/account?action=view&id=" + id1);
+            if (user.getRole().getId() == 1) {
+                String id = request.getParameter("id");
+                try {
+                    int id1 = Integer.parseInt(id);
+                    User u = dao.getUserById(id1);
+                    request.setAttribute("u", u);
+                    request.getRequestDispatcher("EditU.jsp").forward(request, response);
+                } catch (Exception e) {
+                    response.sendRedirect("/login");
                 }
 
-            } catch (Exception e) {
-                response.sendRedirect("/login");
-                System.out.println(e);
+            }else{
+                response.sendRedirect("/home");
             }
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            UserDAO dao = new UserDAO();
+            String action = request.getParameter("action");
+            if (action.equals("editRole")) {
+                String name = request.getParameter("name");
+                String phone = request.getParameter("phone");
+                String date = request.getParameter("date");
+                String gender = request.getParameter("gender");
+                String citizen = request.getParameter("cID");
+                String health = request.getParameter("hID");
+                String address = request.getParameter("address");
+                String gmail = request.getParameter("gmail");
+                String id = request.getParameter("id");
+                String role = request.getParameter("role");
+                String major = request.getParameter("major");
+                String salary = request.getParameter("salary");
+                try {
+                    float sala = Float.parseFloat(salary);
+                    int gender1 = Integer.parseInt(gender);
+                    int id1 = Integer.parseInt(id);
+                    int role1 = Integer.parseInt(role);
+                    int major1 = Integer.parseInt(major);
+                    Major j = dao.getMajorById(major1);
+                    Role r = dao.getRoleById(role1);
+                    User u = new User(name, phone, date, gender1, citizen, health, address, r, j, sala, gmail);
+                    if (r.getId() == 3) {
+                        dao.editUserByAdmin2(u, id1);
+                        response.sendRedirect("/account?action=view&id=" + id1);
+                    } else if (r.getId() == 2) {
+                        dao.editUserByAdmin(u, id1);
+                        response.sendRedirect("/account?action=view&id=" + id1);
+                    } else {
+                        dao.editUserByAdmin1(u, id1);
+                        response.sendRedirect("/account?action=view&id=" + id1);
+                    }
 
-}
+                } catch (Exception e) {
+                    response.sendRedirect("/login");
+                    System.out.println(e);
+                }
+            }
+        }
+
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
+        return "Short description";
+        }// </editor-fold>
+
+    }

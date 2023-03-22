@@ -18,14 +18,22 @@ import model.User;
  * @author PC
  */
 public class BillDAO extends DbContext {
+      public ArrayList<Bill> getListByPage(ArrayList<Bill> list1, int start, int end) {
+        ArrayList<Bill> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list1.get(i));
+        }
+        return arr;
+    }
 
-    public ArrayList<Bill> getAllBill() {
+    public ArrayList<Bill> getAllBillByStatus(int status ) {
         UserDAO dao = new UserDAO();
         ExamDAO edao = new ExamDAO();
         ArrayList<Bill> list = new ArrayList<>();
-        String sql = "select * from Bill";
+        String sql = "select * from Bill where status = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, status);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Bill(rs.getInt("Id"),
@@ -189,13 +197,13 @@ public class BillDAO extends DbContext {
         ExamDAO edao = new ExamDAO();
 //        float b = dao.getTotalPriceByBill(4);
 //        System.out.println(b);
-        ArrayList<BillOrder> list = dao.getAllBillOrdersById(4);
+//        ArrayList<BillOrder> list = dao.getAllBillOrdersById(4);
 
 //        Bill b = new Bill(udao.getUserById(1), edao.getExamById(1), 0, 0);
 //        int a = dao.createBill(b);
 //        System.out.println(a);
-//        ArrayList<Bill> list = dao.getAllBill();
-        for (BillOrder b : list) {
+        ArrayList<Bill> list = dao.getAllBillByStatus(1);
+        for (Bill b : list) {
             System.out.println(b);
         }
     }

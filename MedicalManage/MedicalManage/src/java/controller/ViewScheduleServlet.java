@@ -13,7 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Schedule;
+import model.User;
 
 /**
  *
@@ -59,6 +61,9 @@ public class ViewScheduleServlet extends HttpServlet {
     throws ServletException, IOException {
        ScheduleDAO dao = new ScheduleDAO();
        String id = request.getParameter("id");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if(user!= null){
        try{
            int id1 = Integer.parseInt(id);
            Schedule s = dao.getScheduleByID(id1);
@@ -68,7 +73,9 @@ public class ViewScheduleServlet extends HttpServlet {
            response.sendRedirect("/login");
            System.out.println(e);
        }
-    } 
+    } else{
+            response.sendRedirect("/home");
+        }}
 
     /** 
      * Handles the HTTP <code>POST</code> method.

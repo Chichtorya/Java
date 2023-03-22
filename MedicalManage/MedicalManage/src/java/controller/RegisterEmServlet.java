@@ -61,9 +61,14 @@ public class RegisterEmServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+            HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        if (user.getRole().getId() == 1) {
         request.getRequestDispatcher("registerEm.jsp").forward(request, response);
-    } 
-
+    } else{
+            response.sendRedirect("/home");
+        }
+    }
     /** 
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
@@ -132,10 +137,14 @@ public class RegisterEmServlet extends HttpServlet {
                 int gender1 = Integer.parseInt(gender);
                 Major j = dao.getMajorById(major);
                 Role role2 = dao.getRoleById(role1);
-                User u = new User(name, img, phone, date, gender1, Citizen, Health, Address, role2, j, 0,sala, Gmail, Password);
+                User u = new User(name, img, phone, date, gender1, Citizen, Health, Address, role2, j, 1,sala, Gmail, Password);
+                if(role1 == 3){
+                    dao.createUserByAdmin2(u);
+                }
                 if(role1 == 2){
                     dao.createUserByAdmin1(u);
-                }else{
+                }
+                if (role1 == 1 || role1== 4){
                 dao.createUserByAdmin(u);
                 }
                 String ms = "Register success !!!";

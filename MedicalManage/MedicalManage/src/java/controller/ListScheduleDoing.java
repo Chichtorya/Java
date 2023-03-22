@@ -63,6 +63,9 @@ public class ListScheduleDoing extends HttpServlet {
         ScheduleDAO dao = new ScheduleDAO();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
+        if(user == null || user.getRole().getId() == 4 ){
+            response.sendRedirect("/home");
+        }else
         if (user.getRole().getId() == 2) {
             ArrayList<Schedule> list = dao.getAllScheduleDoing(user.getId());
             request.setAttribute("ListSchedule", list);

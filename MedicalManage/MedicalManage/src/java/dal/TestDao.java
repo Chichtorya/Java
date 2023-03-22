@@ -20,7 +20,7 @@ public class TestDao extends DbContext {
 
     public static void main(String[] args) {
         TestDao tdao = new TestDao();
-        BiochemistryTests t = tdao.getBioTestByExamId(6);
+        BloodTests t = tdao.getBloodTestByExamId(9);
         System.out.println(t);
     }
 
@@ -69,7 +69,8 @@ public class TestDao extends DbContext {
                         rs.getFloat("Platelets"),
                         rs.getFloat("Hemoglobin"),
                         rs.getFloat("Hematocrit"),
-                        rs.getInt("Mean_Corpuscular_Volume")
+                        rs.getInt("Mean_Corpuscular_Volume"),
+                        rs.getString("result")
                 );
 
             }

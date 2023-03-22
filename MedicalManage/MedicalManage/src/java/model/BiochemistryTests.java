@@ -14,7 +14,7 @@ public class BiochemistryTests {
     private User id_doctor;
     private Exam id_exam;
     private float Fasting;
-    private float pp;//Post Prandial
+    private float pp;
     private float Urea;
     private float S_Creatinine;
     private float Sodium;

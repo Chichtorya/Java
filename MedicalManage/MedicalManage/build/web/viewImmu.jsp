@@ -10,7 +10,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+         <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> G6 - Health Care </title>
     </head>
     <style>
         table {
@@ -40,7 +42,7 @@
                 <hr>
                 <br>
                 <div style="padding-left: 120px" >
-                    <table>
+                     <table>
                         <tr>
                             <th>#</th>
                             <th>Name test</th>
@@ -51,37 +53,37 @@
                             <td>#</td>
                             <td>Digoxin</td>
                             <td>${s.digoxin}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Estradiol</td>
                             <td>${s.estradiol}</td>
-                            <td>cell</td>
+                            <td>pg/ml</td>
                         </tr>                                             
                         <tr>
                             <td>#</td>
                             <td>Ferritin</td>
                             <td>${s.ferritin}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>FolicAcid</td>
                             <td>${s.folicAcid}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Progesterone</td>
                             <td>${s.progesterone}</td>
-                            <td>cell</td>
+                            <td>ng/ml</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>Prolactin</td>
                             <td>${s.prolactin}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                         <tr>
                             <td>#</td>
@@ -93,19 +95,20 @@
                             <td>#</td>
                             <td>Testosterone</td>
                             <td>${s.testosterone}</td>
-                            <td>cell</td>
+                            <td>ng/dl</td>
                         </tr>
                         <tr>
                             <td>#</td>
                             <td>TotalPSA</td>
                             <td>${s.totalPSA}</td>
-                            <td>cell</td>
+                            <td>ng/mL</td>
                         </tr>
                     </table>
+
                 </div>
                  <div style="padding-left: 120px">
                 Result :<br>
-                <textarea id="id" name="result" rows="5" cols="100">${s.result}</textarea>
+                <textarea id="id" name="result" rows="5" cols="100">${requestScope.s.result}</textarea>
                 </div>
 
         </div>
